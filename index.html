@@ -1,36 +1,309 @@
-<div class="intro" id="intro">
-  <div class="intro-inner">
-    <p class="intro-copy">食と喫茶、日々の集い</p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>若草 / Creer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;900&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;900&display=swap');
+
+    :root {
+      --color-bg:      #dcd6c8;
+      --color-text:    #2c2c2c;
+      --color-accent:  #8a6c2a;
+      --color-sub:     #4a4540;
+      --color-border:  #2e2b26;
+      --logo-wakakusa: url('https://i.imgur.com/ZV6YwqD.png');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #dcd6c8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      font-family: 'Zen Old Mincho', serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.85;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.35' numOctaves='6' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      mix-blend-mode: multiply;
+    }
+
+    .stage {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .tanzaku {
+      width: 120px;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.8s ease;
+    }
+
+    .tanzaku:hover {
+      opacity: 0.75;
+    }
+
+    .tanzaku-name {
+      width: 80%;
+      height: 85%;
+      background-image: var(--logo-wakakusa);
+      background-size: 75%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 8px;
+    }
+
+    .wakakusa-copy {
+      writing-mode: horizontal-tb;
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: #f5f0e8;
+      opacity: 0.85;
+      white-space: nowrap;
+    }
+
+    .wakakusa {
+      background-color: #8c3a3a;
+    }
+
+    .cree {
+      background-color: #2e4a3d;
+    }
+
+    .tanzaku-name-cree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      gap: 12px;
+      padding: 20px 8px;
+    }
+
+    .cree-vine {
+      width: 36px;
+      height: 90px;
+      opacity: 0.85;
+    }
+
+    .cree-title {
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: #f5f0e8;
+      white-space: nowrap;
+    }
+
+    .cree-sub {
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.45rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: #f5f0e8;
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(44, 44, 44, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-inner {
+      background-color: #dcd6c8;
+      padding: 48px 40px;
+      width: 90%;
+      max-width: 480px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+
+    .modal-inner h2 {
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: #2c2c2c;
+      margin-bottom: 24px;
+    }
+
+    .modal-inner p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      line-height: 2;
+      color: #2c2c2c;
+    }
+
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1c1a17;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      cursor: pointer;
+      transition: opacity 2.5s ease;
+    }
+
+    .intro.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .intro-inner {
+      text-align: center;
+    }
+
+    .intro-copy {
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      color: #e8dfc8;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .intro-copy.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- イントロ画面 季節ごとに intro-copy のテキストを書き換えてください -->
+  <div class="intro" id="intro">
+    <div class="intro-inner">
+      <p class="intro-copy">食と喫茶、日々の集い</p>
+    </div>
   </div>
-</div>
-<div class="stage">
-  <div class="tanzaku wakakusa" onclick="openModal('wakakusa')">
-  <span class="tanzaku-name">
-    <span class="wakakusa-copy">食と喫茶</span>
-  </span>
-</div>
-  <div class="tanzaku cree" onclick="openModal('cree')">
-  <span class="tanzaku-name-cree">
-    <svg class="cree-vine" viewBox="0 0 60 180" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 10 Q35 40 30 70 Q25 100 30 140 Q33 160 30 175" 
-            stroke="#f5f0e8" stroke-width="1" fill="none" opacity="0.7"/>
-      <ellipse cx="38" cy="35" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-30 38 35)"/>
-      <ellipse cx="22" cy="60" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(20 22 60)"/>
-      <ellipse cx="36" cy="90" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-15 36 90)"/>
-      <ellipse cx="24" cy="118" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(25 24 118)"/>
-    </svg>
-    <span class="cree-title">Creer</span>
-    <span class="cree-sub">gallery & space</span>
-  </span>
-</div>
 
-<div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
-  <a class="modal-inner" href="https://若草のURL" target="_blank" onclick="event.stopPropagation()">
-    <h2>若草</h2>
-    <p>飲食店のコンセプトがここに入ります。</p>
-  </a>
-</div>
+  <!-- 短冊エリア -->
+  <div class="stage">
 
-<div class="modal" id="modal-cree" onclick="closeModal('cree')">
-  <a class="modal-inner" href="https://クレエのURL" target="_blank" onclick="event.stopPropagation()">
-    <h2>クレエ</h2>
+    <!-- 若草 -->
+    <div class="tanzaku wakakusa" onclick="openModal('wakakusa')">
+      <span class="tanzaku-name">
+        <span class="wakakusa-copy">食と喫茶</span>
+      </span>
+    </div>
+
+    <!-- Creer -->
+    <div class="tanzaku cree" onclick="openModal('cree')">
+      <span class="tanzaku-name-cree">
+        <svg class="cree-vine" viewBox="0 0 60 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 10 Q35 40 30 70 Q25 100 30 140 Q33 160 30 175"
+                stroke="#f5f0e8" stroke-width="1" fill="none" opacity="0.7"/>
+          <ellipse cx="38" cy="35" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-30 38 35)"/>
+          <ellipse cx="22" cy="60" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(20 22 60)"/>
+          <ellipse cx="36" cy="90" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-15 36 90)"/>
+          <ellipse cx="24" cy="118" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(25 24 118)"/>
+        </svg>
+        <span class="cree-title">Creer</span>
+        <span class="cree-sub">gallery &amp; space</span>
+      </span>
+    </div>
+
+  </div>
+
+  <!-- 若草モーダル -->
+  <div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
+    <a class="modal-inner" href="#" target="_blank" onclick="event.stopPropagation()">
+      <h2>若草</h2>
+      <p>飲食店のコンセプトがここに入ります。</p>
+    </a>
+  </div>
+
+  <!-- Creerモーダル -->
+  <div class="modal" id="modal-cree" onclick="closeModal('cree')">
+    <a class="modal-inner" href="#" target="_blank" onclick="event.stopPropagation()">
+      <h2>Creer</h2>
+      <p>骨董品店のコンセプトがここに入ります。</p>
+    </a>
+  </div>
+
+  <script>
+    function openModal(name) {
+      const modal = document.getElementById('modal-' + name);
+      modal.classList.add('active');
+    }
+
+    function closeModal(name) {
+      const modal = document.getElementById('modal-' + name);
+      modal.classList.remove('active');
+    }
+
+    // イントロ演出
+    const intro = document.getElementById('intro');
+    const introCopy = document.querySelector('.intro-copy');
+
+    // 即表示
+    introCopy.classList.add('show');
+
+    // 5秒後に自動フェードアウト
+    setTimeout(() => {
+      intro.classList.add('hide');
+    }, 5000);
+
+    // タップで即座に閉じる
+    intro.addEventListener('click', () => {
+      intro.classList.add('hide');
+    });
+  </script>
+
+</body>
+</html>
