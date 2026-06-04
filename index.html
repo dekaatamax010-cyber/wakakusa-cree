@@ -257,11 +257,11 @@
 
     /* コンテンツ本体 */
     .modal-content {
-      padding: 40px 32px;
+      padding: clamp(24px, 5vw, 48px) clamp(20px, 6vw, 40px);
     }
 
     .modal-title {
-      font-size: 1.6rem;
+      font-size: clamp(1.3rem, 4vw, 1.6rem);
       font-weight: 400;
       letter-spacing: 0.3em;
       color: var(--color-text);
@@ -269,30 +269,32 @@
     }
 
     .modal-caption {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: clamp(0.65rem, 2vw, 0.75rem);
+      letter-spacing: 0.15em;
       color: var(--color-sub);
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .modal-text {
-      font-size: 0.9rem;
+      font-size: clamp(0.82rem, 2.2vw, 0.92rem);
       font-weight: 400;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       line-height: 2.2;
       color: var(--color-text);
-      margin-bottom: 40px;
+      margin-bottom: 36px;
+      word-break: normal;
+      overflow-wrap: break-word;
     }
 
     /* 営業時間 */
     .modal-hours {
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       border-top: 1px solid #c8c0b0;
       padding-top: 24px;
     }
 
     .modal-hours-title {
-      font-size: 0.65rem;
+      font-size: clamp(0.6rem, 1.8vw, 0.7rem);
       letter-spacing: 0.3em;
       color: var(--color-sub);
       margin-bottom: 16px;
@@ -301,10 +303,22 @@
     .modal-hours-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
+      align-items: baseline;
+      font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+      letter-spacing: 0.03em;
       line-height: 2;
       color: var(--color-text);
+      gap: 8px;
+    }
+
+    .modal-hours-row span:first-child {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .modal-hours-row span:last-child {
+      white-space: nowrap;
+      text-align: right;
     }
 
     /* ── 予約ボタンエリア ── */
@@ -313,20 +327,21 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
 
     .btn-reserve {
       display: block;
       text-align: center;
       border: 1px solid var(--color-text);
-      padding: 14px 24px;
+      padding: 14px 16px;
       font-family: 'Zen Old Mincho', serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
+      font-size: clamp(0.72rem, 2vw, 0.82rem);
+      letter-spacing: 0.15em;
       color: var(--color-text);
       text-decoration: none;
       transition: background-color 0.3s ease, color 0.3s ease;
+      word-break: keep-all;
     }
 
     .btn-reserve:hover {
@@ -341,25 +356,27 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      padding-bottom: 40px;
     }
 
     .modal-footer-item {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
+      font-size: clamp(0.72rem, 2vw, 0.8rem);
+      letter-spacing: 0.03em;
       color: var(--color-text);
       text-decoration: none;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .modal-footer-label {
-      font-size: 0.6rem;
+      font-size: clamp(0.58rem, 1.6vw, 0.65rem);
       letter-spacing: 0.2em;
       color: var(--color-sub);
-      min-width: 48px;
+      min-width: 44px;
       padding-top: 2px;
+      flex-shrink: 0;
     }
 
     /* イントロ */
@@ -467,18 +484,15 @@
         <p class="modal-caption">食と喫茶　静岡市葵区伝馬町</p>
 
         <p class="modal-text">
-          灯りと器に囲まれた空間で、<br>
-          家庭料理と喫茶をお楽しみください。<br><br>
-          骨董品に囲まれたカウンターで、<br>
-          ゆったりと流れる時間をどうぞ。
+          灯りと器に囲まれた空間で、家庭料理と喫茶をお楽しみください。骨董品に囲まれたカウンターで、ゆったりと流れる時間をどうぞ。
         </p>
 
         <!-- 営業時間 -->
         <div class="modal-hours">
           <p class="modal-hours-title">営　業　時　間</p>
-          <div class="modal-hours-row"><span>月・火・水・木</span><span>12:00 — 21:00</span></div>
+          <div class="modal-hours-row"><span>火・水・木・日</span><span>12:00 — 21:00</span></div>
           <div class="modal-hours-row"><span>金・土</span><span>12:00 — 23:00</span></div>
-          <div class="modal-hours-row"><span>日曜日</span><span>定休日</span></div>
+          <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
         <!-- 予約導線エリア：リンク先はここだけ書き換えてください -->
@@ -527,17 +541,15 @@
         <p class="modal-caption">gallery &amp; space　静岡市葵区伝馬町</p>
 
         <p class="modal-text">
-          器と、光と、静けさと。<br><br>
-          骨董品と工芸品が静かに並ぶ空間で、<br>
-          あなただけの一点をお探しください。
+          器と、光と、静けさと。骨董品と工芸品が静かに並ぶ空間で、あなただけの一点をお探しください。
         </p>
 
         <!-- 営業時間 -->
         <div class="modal-hours">
           <p class="modal-hours-title">営　業　時　間</p>
-          <div class="modal-hours-row"><span>月・火・水・木</span><span>12:00 — 21:00</span></div>
+          <div class="modal-hours-row"><span>火・水・木・日</span><span>12:00 — 21:00</span></div>
           <div class="modal-hours-row"><span>金・土</span><span>12:00 — 23:00</span></div>
-          <div class="modal-hours-row"><span>日曜日</span><span>定休日</span></div>
+          <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
         <!-- コンタクトエリア：リンク先はここだけ書き換えてください -->
