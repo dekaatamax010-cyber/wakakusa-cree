@@ -1,0 +1,36 @@
+<div class="intro" id="intro">
+  <div class="intro-inner">
+    <p class="intro-copy">食と喫茶、日々の集い</p>
+  </div>
+</div>
+<div class="stage">
+  <div class="tanzaku wakakusa" onclick="openModal('wakakusa')">
+  <span class="tanzaku-name">
+    <span class="wakakusa-copy">食と喫茶</span>
+  </span>
+</div>
+  <div class="tanzaku cree" onclick="openModal('cree')">
+  <span class="tanzaku-name-cree">
+    <svg class="cree-vine" viewBox="0 0 60 180" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 10 Q35 40 30 70 Q25 100 30 140 Q33 160 30 175" 
+            stroke="#f5f0e8" stroke-width="1" fill="none" opacity="0.7"/>
+      <ellipse cx="38" cy="35" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-30 38 35)"/>
+      <ellipse cx="22" cy="60" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(20 22 60)"/>
+      <ellipse cx="36" cy="90" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-15 36 90)"/>
+      <ellipse cx="24" cy="118" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(25 24 118)"/>
+    </svg>
+    <span class="cree-title">Creer</span>
+    <span class="cree-sub">gallery & space</span>
+  </span>
+</div>
+
+<div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
+  <a class="modal-inner" href="https://若草のURL" target="_blank" onclick="event.stopPropagation()">
+    <h2>若草</h2>
+    <p>飲食店のコンセプトがここに入ります。</p>
+  </a>
+</div>
+
+<div class="modal" id="modal-cree" onclick="closeModal('cree')">
+  <a class="modal-inner" href="https://クレエのURL" target="_blank" onclick="event.stopPropagation()">
+    <h2>クレエ</h2>
