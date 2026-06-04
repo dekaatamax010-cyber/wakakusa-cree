@@ -120,12 +120,11 @@
       white-space: nowrap;
     }
 
-    /* ── モーダル ── */
+    /* ── モーダル共通 ── */
     .modal {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-color: rgba(44, 44, 44, 0.88);
       display: flex;
       align-items: flex-start;
       justify-content: center;
@@ -143,12 +142,86 @@
     }
 
     .modal-inner {
-      background-color: #dcd6c8;
       width: 90%;
       max-width: 480px;
       text-decoration: none;
       display: block;
-      color: var(--color-text);
+    }
+
+    /* 若草：焦茶・和紙 */
+    #modal-wakakusa {
+      background-color: rgba(42, 31, 26, 0.95);
+    }
+
+    #modal-wakakusa .modal-inner {
+      background-color: #f2ece0;
+      color: #2c2c2c;
+    }
+
+    #modal-wakakusa .modal-title,
+    #modal-wakakusa .modal-text,
+    #modal-wakakusa .modal-hours-row,
+    #modal-wakakusa .modal-footer-item {
+      color: #2c2c2c;
+    }
+
+    #modal-wakakusa .modal-caption,
+    #modal-wakakusa .modal-hours-title,
+    #modal-wakakusa .modal-footer-label {
+      color: #7a6a5a;
+    }
+
+    #modal-wakakusa .modal-hours,
+    #modal-wakakusa .modal-footer {
+      border-top-color: #d4c8b4;
+    }
+
+    #modal-wakakusa .btn-reserve {
+      border-color: #2c2c2c;
+      color: #2c2c2c;
+    }
+
+    #modal-wakakusa .btn-reserve:hover {
+      background-color: #2c2c2c;
+      color: #f2ece0;
+    }
+
+    /* Creer：藍墨・白磁 */
+    #modal-cree {
+      background-color: rgba(26, 32, 40, 0.95);
+    }
+
+    #modal-cree .modal-inner {
+      background-color: #edeae3;
+      color: #1e2430;
+    }
+
+    #modal-cree .modal-title,
+    #modal-cree .modal-text,
+    #modal-cree .modal-hours-row,
+    #modal-cree .modal-footer-item {
+      color: #1e2430;
+    }
+
+    #modal-cree .modal-caption,
+    #modal-cree .modal-hours-title,
+    #modal-cree .modal-footer-label {
+      color: #6a7480;
+    }
+
+    #modal-cree .modal-hours,
+    #modal-cree .modal-footer {
+      border-top-color: #ccc8c0;
+    }
+
+    #modal-cree .btn-reserve {
+      border-color: #1e2430;
+      color: #1e2430;
+    }
+
+    #modal-cree .btn-reserve:hover {
+      background-color: #1e2430;
+      color: #edeae3;
     }
 
     /* メイン画像 */
