@@ -349,97 +349,87 @@
       color: #dcd6c8;
     }
 
-    /* 共通フッター */
+    /* ══ フッターリンク ══ */
     .modal-footer {
       border-top: 1px solid #c8c0b0;
       padding-top: 24px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       padding-bottom: 40px;
     }
 
-    .modal-footer-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: clamp(0.72rem, 2vw, 0.8rem);
-      letter-spacing: 0.03em;
-      color: var(--color-text);
-      text-decoration: none;
-      line-height: 1.7;
-    }
-
-    .modal-footer-label {
-      font-size: clamp(0.58rem, 1.6vw, 0.65rem);
-      letter-spacing: 0.2em;
-      color: var(--color-sub);
-      min-width: 44px;
-      padding-top: 2px;
-      flex-shrink: 0;
-    }
-
-    /* ══ 地図モーダル ══ */
-    .map-modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(20, 12, 8, 0.92);
+    .footer-btn {
       display: flex;
       align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.6s ease;
-      z-index: 200;
-      padding: 20px;
-    }
-
-    .map-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .map-modal-inner {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .map-modal-close {
-      position: absolute;
-      top: -36px;
-      right: 0;
-      background: none;
-      border: none;
-      color: #f0e8d0;
-      font-size: 1.2rem;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid currentColor;
+      text-decoration: none;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
       cursor: pointer;
-      opacity: 0.7;
-      letter-spacing: 0;
-      padding: 4px 8px;
-    }
-
-    .map-modal-img {
+      background: none;
       width: 100%;
-      display: block;
-      border: 1px solid rgba(240, 220, 180, 0.2);
+      text-align: left;
+      font-family: 'Zen Old Mincho', serif;
     }
 
-    .map-modal-note {
-      text-align: center;
-      font-family: 'Zen Old Mincho', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: #c0b090;
-      margin-top: 10px;
+    .footer-btn:hover,
+    .footer-btn:active {
       opacity: 0.7;
     }
 
-    /* MAPラベルにホバー効果 */
-    .modal-footer-item[onclick] .modal-footer-label {
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    .footer-btn-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .footer-btn-body {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .footer-btn-label {
+      font-size: clamp(0.58rem, 1.6vw, 0.65rem);
+      letter-spacing: 0.25em;
+      opacity: 0.65;
+    }
+
+    .footer-btn-text {
+      font-size: clamp(0.72rem, 2vw, 0.8rem);
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+    }
+
+    .footer-btn-hint {
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      opacity: 0.55;
+      margin-top: 2px;
+    }
+
+    /* 若草フッターボタン色 */
+    #modal-wakakusa .footer-btn {
+      color: #3d2010;
+      border-color: #d4a870;
+    }
+
+    #modal-wakakusa .footer-btn:hover {
+      background-color: rgba(212, 168, 112, 0.12);
+      opacity: 1;
+    }
+
+    /* Creerフッターボタン色 */
+    #modal-cree .footer-btn {
+      color: #0e1e32;
+      border-color: #7a9ab0;
+    }
+
+    #modal-cree .footer-btn:hover {
+      background-color: rgba(122, 154, 176, 0.12);
+      opacity: 1;
     }
 
     /* イントロ */
@@ -571,18 +561,37 @@
 
         <!-- 共通フッター -->
         <div class="modal-footer">
-          <div class="modal-footer-item" onclick="openMapModal()" style="cursor:pointer;">
-            <span class="modal-footer-label">MAP</span>
-            <span>静岡県静岡市葵区伝馬町10-35</span>
-          </div>
-          <a class="modal-footer-item" href="tel:054-397-4993">
-            <span class="modal-footer-label">TEL</span>
-            <span>054-397-4993</span>
+
+          <!-- MAP：住所テキストでGoogleマップへ -->
+          <a class="footer-btn" href="https://maps.google.com/?q=静岡県静岡市葵区伝馬町10-35" target="_blank">
+            <span class="footer-btn-icon">📍</span>
+            <span class="footer-btn-body">
+              <span class="footer-btn-label">MAP</span>
+              <span class="footer-btn-text">静岡県静岡市葵区伝馬町10-35</span>
+              <span class="footer-btn-hint">タップしてGoogleマップで開く</span>
+            </span>
           </a>
-          <a class="modal-footer-item" href="https://www.instagram.com/creer_shizuoka" target="_blank">
-            <span class="modal-footer-label">SNS</span>
-            <span>@creer_shizuoka</span>
+
+          <!-- TEL -->
+          <a class="footer-btn" href="tel:054-397-4993">
+            <span class="footer-btn-icon">📞</span>
+            <span class="footer-btn-body">
+              <span class="footer-btn-label">TEL</span>
+              <span class="footer-btn-text">054-397-4993</span>
+              <span class="footer-btn-hint">タップして電話する</span>
+            </span>
           </a>
+
+          <!-- SNS -->
+          <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
+            <span class="footer-btn-icon">📷</span>
+            <span class="footer-btn-body">
+              <span class="footer-btn-label">Instagram</span>
+              <span class="footer-btn-text">@creer_shizuoka</span>
+              <span class="footer-btn-hint">タップしてInstagramを開く</span>
+            </span>
+          </a>
+
         </div>
 
       </div>
@@ -634,33 +643,40 @@
 
         <!-- 共通フッター -->
         <div class="modal-footer">
-          <div class="modal-footer-item" onclick="openMapModal()" style="cursor:pointer;">
-            <span class="modal-footer-label">MAP</span>
-            <span>静岡県静岡市葵区伝馬町10-13</span>
-          </div>
-          <a class="modal-footer-item" href="tel:054-397-4993">
-            <span class="modal-footer-label">TEL</span>
-            <span>054-397-4993</span>
+
+          <!-- MAP -->
+          <a class="footer-btn" href="https://maps.google.com/?q=静岡県静岡市葵区伝馬町10-13" target="_blank">
+            <span class="footer-btn-icon">📍</span>
+            <span class="footer-btn-body">
+              <span class="footer-btn-label">MAP</span>
+              <span class="footer-btn-text">静岡県静岡市葵区伝馬町10-13</span>
+              <span class="footer-btn-hint">タップしてGoogleマップで開く</span>
+            </span>
           </a>
-          <a class="modal-footer-item" href="https://www.instagram.com/creer_shizuoka" target="_blank">
-            <span class="modal-footer-label">SNS</span>
-            <span>@creer_shizuoka</span>
+
+          <!-- TEL -->
+          <a class="footer-btn" href="tel:054-397-4993">
+            <span class="footer-btn-icon">📞</span>
+            <span class="footer-btn-body">
+              <span class="footer-btn-label">TEL</span>
+              <span class="footer-btn-text">054-397-4993</span>
+              <span class="footer-btn-hint">タップして電話する</span>
+            </span>
           </a>
+
+          <!-- SNS -->
+          <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
+            <span class="footer-btn-icon">📷</span>
+            <span class="footer-btn-body">
+              <span class="footer-btn-label">Instagram</span>
+              <span class="footer-btn-text">@creer_shizuoka</span>
+              <span class="footer-btn-hint">タップしてInstagramを開く</span>
+            </span>
+          </a>
+
         </div>
 
       </div>
-    </div>
-  </div>
-
-  <!-- 地図モーダル -->
-  <div class="map-modal" id="map-modal" onclick="closeMapModal()">
-    <div class="map-modal-inner" onclick="event.stopPropagation()">
-      <button class="map-modal-close" onclick="closeMapModal()">✕</button>
-      <!-- 画像タップでGoogleマップへ -->
-      <a href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
-        <img class="map-modal-img" src="https://i.imgur.com/SBmjoau.jpg" alt="店舗案内地図">
-      </a>
-      <p class="map-modal-note">地図をタップするとGoogleマップが開きます</p>
     </div>
   </div>
 
@@ -675,14 +691,6 @@
       const modal = document.getElementById('modal-' + name);
       modal.classList.remove('active');
       document.body.style.overflow = '';
-    }
-
-    function openMapModal() {
-      document.getElementById('map-modal').classList.add('active');
-    }
-
-    function closeMapModal() {
-      document.getElementById('map-modal').classList.remove('active');
     }
 
     // イントロ演出
