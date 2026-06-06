@@ -379,6 +379,69 @@
       flex-shrink: 0;
     }
 
+    /* ══ 地図モーダル ══ */
+    .map-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(20, 12, 8, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+      z-index: 200;
+      padding: 20px;
+    }
+
+    .map-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .map-modal-inner {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .map-modal-close {
+      position: absolute;
+      top: -36px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #f0e8d0;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      letter-spacing: 0;
+      padding: 4px 8px;
+    }
+
+    .map-modal-img {
+      width: 100%;
+      display: block;
+      border: 1px solid rgba(240, 220, 180, 0.2);
+    }
+
+    .map-modal-note {
+      text-align: center;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: #c0b090;
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+
+    /* MAPラベルにホバー効果 */
+    .modal-footer-item[onclick] .modal-footer-label {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     /* イントロ */
     .intro {
       position: fixed;
@@ -508,10 +571,10 @@
 
         <!-- 共通フッター -->
         <div class="modal-footer">
-          <a class="modal-footer-item" href="https://maps.google.com/?q=静岡県静岡市葵区伝馬町10-35" target="_blank">
+          <div class="modal-footer-item" onclick="openMapModal()" style="cursor:pointer;">
             <span class="modal-footer-label">MAP</span>
             <span>静岡県静岡市葵区伝馬町10-35</span>
-          </a>
+          </div>
           <a class="modal-footer-item" href="tel:054-397-4993">
             <span class="modal-footer-label">TEL</span>
             <span>054-397-4993</span>
@@ -571,10 +634,10 @@
 
         <!-- 共通フッター -->
         <div class="modal-footer">
-          <a class="modal-footer-item" href="https://maps.google.com/?q=静岡県静岡市葵区伝馬町10-13" target="_blank">
+          <div class="modal-footer-item" onclick="openMapModal()" style="cursor:pointer;">
             <span class="modal-footer-label">MAP</span>
             <span>静岡県静岡市葵区伝馬町10-13</span>
-          </a>
+          </div>
           <a class="modal-footer-item" href="tel:054-397-4993">
             <span class="modal-footer-label">TEL</span>
             <span>054-397-4993</span>
@@ -589,6 +652,18 @@
     </div>
   </div>
 
+  <!-- 地図モーダル -->
+  <div class="map-modal" id="map-modal" onclick="closeMapModal()">
+    <div class="map-modal-inner" onclick="event.stopPropagation()">
+      <button class="map-modal-close" onclick="closeMapModal()">✕</button>
+      <!-- 画像タップでGoogleマップへ -->
+      <a href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
+        <img class="map-modal-img" src="https://i.imgur.com/SBmjoau.jpg" alt="店舗案内地図">
+      </a>
+      <p class="map-modal-note">地図をタップするとGoogleマップが開きます</p>
+    </div>
+  </div>
+
   <script>
     function openModal(name) {
       const modal = document.getElementById('modal-' + name);
@@ -600,6 +675,14 @@
       const modal = document.getElementById('modal-' + name);
       modal.classList.remove('active');
       document.body.style.overflow = '';
+    }
+
+    function openMapModal() {
+      document.getElementById('map-modal').classList.add('active');
+    }
+
+    function closeMapModal() {
+      document.getElementById('map-modal').classList.remove('active');
     }
 
     // イントロ演出
