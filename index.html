@@ -41,27 +41,26 @@
       mix-blend-mode: multiply;
     }
 
-    /* ── 閉じるボタン ── */
+    /* ── 閉じるボタン（固定・常に見える）── */
     .modal-close {
-      position: sticky;
-      top: 16px;
-      float: right;
-      margin: 16px 16px 0 0;
-      width: 36px;
-      height: 36px;
-      background: none;
-      border: 1px solid rgba(200, 180, 150, 0.5);
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(20, 12, 8, 0.7);
+      border: 1px solid rgba(240, 220, 180, 0.5);
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Zen Old Mincho', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0;
-      color: rgba(200, 180, 150, 0.8);
+      font-size: 0.8rem;
+      color: rgba(240, 220, 180, 0.85);
       transition: opacity 0.3s ease;
-      z-index: 10;
+      z-index: 9999;
+      pointer-events: all;
     }
 
     .modal-close:hover {
@@ -543,6 +542,9 @@
     <p class="intro-copy">食と喫茶、日々の集い</p>
   </div>
 
+  <!-- 共通閉じるボタン（固定・モーダル開時のみ表示）-->
+  <button class="modal-close" style="display:none;" onclick="closeModal(this.getAttribute('data-modal'))">✕</button>
+
   <!-- 短冊エリア -->
   <div class="stage">
 
@@ -574,9 +576,6 @@
   <!-- 若草モーダル -->
   <div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
     <div class="modal-inner" onclick="event.stopPropagation()">
-
-      <!-- 右上の閉じるボタン -->
-      <button class="modal-close" onclick="closeModal('wakakusa')">✕</button>
 
       <!-- 若草メイン画像 -->
       <div class="modal-image-wrap">
@@ -657,9 +656,6 @@
   <div class="modal" id="modal-cree" onclick="closeModal('cree')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
-      <!-- 右上の閉じるボタン -->
-      <button class="modal-close" onclick="closeModal('cree')">✕</button>
-
       <!-- Creerメイン画像 -->
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
@@ -735,4 +731,7 @@
         </div>
 
         <!-- 戻るボタン -->
-        <button class="modal-back" onclick="cl
+        <button class="modal-back" onclick="closeModal('cree')">— 閉じる —</button>
+
+      </div>
+    <
