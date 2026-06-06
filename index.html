@@ -738,63 +738,52 @@
   </div>
 
   <script>
-    // LINEブラウザ検出
-    const isLineBrowser = navigator.userAgent.indexOf('Line') !== -1 || 
-                          navigator.userAgent.indexOf('FBAN') !== -1;
+// LINEブラウザ検出
+const isLineBrowser = navigator.userAgent.indexOf('Line') !== -1 || navigator.userAgent.indexOf('FBAN') !== -1;
 
-    function openModal(name) {
-      const modal = document.getElementById('modal-' + name);
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      // 閉じるボタン表示
-      document.querySelectorAll('.modal-close').forEach(btn => {
+function openModal(name) {
+    const modal = document.getElementById('modal-' + name);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.querySelectorAll('.modal-close').forEach(btn => {
         btn.setAttribute('data-modal', name);
         btn.style.display = 'flex';
-      });
-      // LINE以外でHistory API使用
-      if (!isLineBrowser) {
-        history.pushState({ modal: name }, '', '');
-      }
-    }
+    });
+    if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
+}
 
-    function closeModal(name) {
-      const modal = document.getElementById('modal-' + name);
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-      // 閉じるボタン非表示
-      document.querySelectorAll('.modal-close').forEach(btn => {
-        btn.style.display = 'none';
-      });
-    }
+function closeModal(name) {
+    const modal = document.getElementById('modal-' + name);
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    document.querySelectorAll('.modal-close').forEach(btn => { btn.style.display = 'none'; });
+}
 
-    // 戻るボタン（Chrome・Safari）でモーダルを閉じる
-    if (!isLineBrowser) {
-      window.addEventListener('popstate', function(e) {
-        const modals = document.querySelectorAll('.modal.active');
-        modals.forEach(modal => {
-          const name = modal.id.replace('modal-', '');
-          closeModal(name);
+// 戻るボタン（Chrome・Safari）対応
+if (!isLineBrowser) {
+    window.addEventListener('popstate', function(e) {
+        document.querySelectorAll('.modal.active').forEach(modal => {
+            closeModal(modal.id.replace('modal-', ''));
         });
-      });
-    }
+    });
+}
 
-    // イントロ演出
-    const intro = document.getElementById('intro');
-    const introCopy = document.querySelector('.intro-copy');
+// イントロ演出（ここを修正）
+const intro = document.getElementById('intro');
+const introCopy = document.querySelector('.intro-copy');
+let introTimer = setTimeout(hideIntro, 5000); // 5秒後に自動実行
 
-    introCopy.classList.add('show');
-
-    function hideIntro() {
-      intro.classList.add('hide');
-      // フェードアウト完了後に完全非表示
-      setTimeout(() => {
+function hideIntro() {
+    clearTimeout(introTimer); // 自動タイマーを解除
+    intro.classList.add('hide');
+    setTimeout(() => {
         intro.style.display = 'none';
-      }, 2600);
-    }
+    }, 2500); // CSSのtransition 2.5sと合わせる
+}
 
-    setTimeout(hideIntro, 5000);
-    intro.addEventListener('click', hideIntro);
-  </script>
+introCopy.classList.add('show');
+intro.addEventListener('click', hideIntro);
+</script>
 
 </body>
 </html>
