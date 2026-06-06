@@ -41,6 +41,55 @@
       mix-blend-mode: multiply;
     }
 
+    /* ── 閉じるボタン ── */
+    .modal-close {
+      position: sticky;
+      top: 16px;
+      float: right;
+      margin: 16px 16px 0 0;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid rgba(200, 180, 150, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0;
+      color: rgba(200, 180, 150, 0.8);
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      opacity: 0.6;
+    }
+
+    /* 戻るボタン（下部）*/
+    .modal-back {
+      display: block;
+      text-align: center;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: inherit;
+      opacity: 0.45;
+      padding: 20px 0 8px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      transition: opacity 0.3s ease;
+      text-decoration: none;
+    }
+
+    .modal-back:hover {
+      opacity: 0.7;
+    }
+
     /* ── 短冊エリア ── */
     .stage {
       padding: 40px 20px;
@@ -526,6 +575,9 @@
   <div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
+      <!-- 右上の閉じるボタン -->
+      <button class="modal-close" onclick="closeModal('wakakusa')">✕</button>
+
       <!-- 若草メイン画像 -->
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed.webp" alt="若草">
@@ -550,12 +602,12 @@
 
         <!-- 予約導線エリア：リンク先はここだけ書き換えてください -->
         <div class="modal-reserve">
-          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank" style="border-color:#2c2c2c; color:#3d2010;">
-  お席のご案内<br>DMにて承ります
-</a>
-<a class="btn-reserve" href="tel:054-397-4993" style="border-color:#2c2c2c; color:#3d2010;">
-  お電話でのご予約<br>054-397-4993
-</a>
+          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">
+            お席のご案内<br>DMにて承ります
+          </a>
+          <a class="btn-reserve" href="tel:054-397-4993">
+            お電話でのご予約<br>054-397-4993
+          </a>
         </div>
         <!-- 予約導線エリア ここまで -->
 
@@ -563,7 +615,7 @@
         <div class="modal-footer">
 
           <!-- MAP：住所テキストでGoogleマップへ -->
-          <a class="footer-btn" href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank" style="border-color:#2c2c2c; color:#3d2010;">
+          <a class="footer-btn" href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
             <span class="footer-btn-icon">📍</span>
             <span class="footer-btn-body">
               <span class="footer-btn-label">MAP</span>
@@ -594,6 +646,9 @@
 
         </div>
 
+        <!-- 戻るボタン -->
+        <button class="modal-back" onclick="closeModal('wakakusa')">— 閉じる —</button>
+
       </div>
     </div>
   </div>
@@ -601,6 +656,9 @@
   <!-- Creerモーダル -->
   <div class="modal" id="modal-cree" onclick="closeModal('cree')">
     <div class="modal-inner" onclick="event.stopPropagation()">
+
+      <!-- 右上の閉じるボタン -->
+      <button class="modal-close" onclick="closeModal('cree')">✕</button>
 
       <!-- Creerメイン画像 -->
       <div class="modal-image-wrap">
@@ -676,33 +734,5 @@
 
         </div>
 
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function openModal(name) {
-      const modal = document.getElementById('modal-' + name);
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(name) {
-      const modal = document.getElementById('modal-' + name);
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    // イントロ演出
-    const intro = document.getElementById('intro');
-    const introCopy = document.querySelector('.intro-copy');
-
-    introCopy.classList.add('show');
-
-    setTimeout(() => { intro.classList.add('hide'); }, 5000);
-
-    intro.addEventListener('click', () => { intro.classList.add('hide'); });
-  </script>
-
-</body>
-</html>
+        <!-- 戻るボタン -->
+        <button class="modal-back" onclick="cl
