@@ -30,6 +30,19 @@
       justify-content: center;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      opacity: 0.85;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.35' numOctaves='6' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      mix-blend-mode: multiply;
+    }
+
     /* ── 閉じるボタン ── */
     .modal-close {
       position: fixed;
@@ -205,12 +218,11 @@
     }
 
     .gallery-item {
-      /* 5枚で100%になるよう幅を設定（複製分含め10枚で200%）*/
       width: 20vw;
       max-width: 96px;
       flex-shrink: 0;
       cursor: pointer;
-      border-right: 3px solid #faf3e0;
+      border: 3px solid #faf3e0;
       overflow: hidden;
       aspect-ratio: 1/1;
     }
@@ -234,21 +246,53 @@
       background-image: var(--bg-texture);
       background-size: cover;
       background-position: center;
-      display: none;
+      display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9000;
-      cursor: zoom-out;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
     }
 
-    .gallery-overlay.active { display: flex; }
+    .gallery-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
 
     .gallery-full {
       max-width: 92%;
-      max-height: 85vh;
+      max-height: 80vh;
       object-fit: contain;
-      border: 2px solid rgba(240, 220, 180, 0.3);
+      border: 2px solid rgba(240, 220, 180, 0.4);
+      transform: scale(0.92);
+      transition: transform 0.5s ease;
     }
+
+    .gallery-overlay.active .gallery-full {
+      transform: scale(1);
+    }
+
+    .gallery-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(20, 12, 8, 0.7);
+      border: 1px solid rgba(240, 220, 180, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.8rem;
+      color: rgba(240, 220, 180, 0.85);
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-close:hover { opacity: 0.6; }
 
     /* ── コンテンツ本体 ── */
     .modal-content {
@@ -523,6 +567,7 @@
   </div>
 
   <!-- 若草モーダル -->
+  <!-- 若草モーダル -->
   <div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
@@ -583,7 +628,13 @@
             </span>
           </a>
           <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
-            <span class="footer-btn-icon">📷</span>
+            <span class="footer-btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
             <span class="footer-btn-body">
               <span class="footer-btn-label">Instagram</span>
               <span class="footer-btn-text">@creer_shizuoka</span>
@@ -660,7 +711,13 @@
             </span>
           </a>
           <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
-            <span class="footer-btn-icon">📷</span>
+            <span class="footer-btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
             <span class="footer-btn-body">
               <span class="footer-btn-label">Instagram</span>
               <span class="footer-btn-text">@creer_shizuoka</span>
@@ -676,7 +733,8 @@
 
   <!-- 拡大表示オーバーレイ -->
   <div class="gallery-overlay" id="gallery-overlay" onclick="closeGallery()">
-    <img class="gallery-full" id="gallery-full-img" src="" alt="">
+    <button class="gallery-close" onclick="closeGallery()">✕</button>
+    <img class="gallery-full" id="gallery-full-img" src="" alt="" onclick="event.stopPropagation()">
   </div>
 
   <script>
@@ -700,16 +758,23 @@
 
     if (!isLineBrowser) {
       window.addEventListener('popstate', function() {
-        document.querySelectorAll('.modal.active').forEach(m => {
-          closeModal(m.id.replace('modal-', ''));
-        });
+        const overlay = document.getElementById('gallery-overlay');
+        if (overlay.classList.contains('active')) {
+          closeGallery();
+        } else {
+          document.querySelectorAll('.modal.active').forEach(m => {
+            closeModal(m.id.replace('modal-', ''));
+          });
+        }
       });
     }
 
     function openGallery(src, e) {
       e.stopPropagation();
       document.getElementById('gallery-full-img').src = src;
-      document.getElementById('gallery-overlay').classList.add('active');
+      const overlay = document.getElementById('gallery-overlay');
+      overlay.classList.add('active');
+      if (!isLineBrowser) { history.pushState({ gallery: true }, '', ''); }
     }
 
     function closeGallery() {
