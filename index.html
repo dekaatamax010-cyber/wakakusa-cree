@@ -8,10 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg:      #dcd6c8;
-      --color-text:    #2c2c2c;
-      --color-sub:     #4a4540;
       --logo-wakakusa: url('https://i.imgur.com/ZV6YwqD.png');
+      --color-dark:    #3d2010;
+      --color-mid:     #7a5030;
+      --color-bg-modal: #faf3e0;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -155,6 +155,8 @@
       overflow-y: auto;
       padding: 40px 0;
       z-index: 100;
+      /* モーダル外側をホームと同じ背景色に */
+      background-color: rgba(220, 214, 200, 0.96);
     }
 
     .modal.active {
@@ -166,20 +168,15 @@
       width: 90%;
       max-width: 480px;
       display: block;
-      background-color: #faf3e0;
+      background-color: var(--color-bg-modal);
     }
 
-    /* 両モーダル共通配色 */
-    #modal-wakakusa,
-    #modal-cree {
-      background-color: rgba(26, 15, 10, 0.97);
-    }
-
-    /* メイン画像 */
+    /* ── メイン画像 ── */
     .modal-image-wrap {
       width: 100%;
       aspect-ratio: 4/3;
       overflow: hidden;
+      margin-bottom: 0;
     }
 
     .modal-image {
@@ -190,42 +187,49 @@
       display: block;
     }
 
-    /* ── 横スクロールギャラリー ── */
+    /* ── 横スクロールギャラリー（エンドレス自動スクロール）── */
     .gallery-scroll {
       width: 100%;
-      overflow-x: auto;
-      background-color: #1a0f0a;
-      padding: 12px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+      overflow: hidden;
+      background-color: var(--color-bg-modal);
+      position: relative;
     }
 
-    .gallery-scroll::-webkit-scrollbar { display: none; }
-
-    .gallery-inner {
+    .gallery-track {
       display: flex;
-      gap: 8px;
+      animation: gallery-loop 25s linear infinite;
       width: max-content;
     }
 
-    .gallery-item {
-      width: 100px;
-      height: 100px;
-      flex-shrink: 0;
-      cursor: pointer;
-      border: 3px solid #faf3e0;
-      overflow: hidden;
-      transition: opacity 0.3s ease;
+    .gallery-track:hover {
+      animation-play-state: paused;
     }
 
-    .gallery-item:hover { opacity: 0.8; }
+    @keyframes gallery-loop {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .gallery-item {
+      /* 5枚で100%になるよう幅を設定（複製分含め10枚で200%）*/
+      width: 20vw;
+      max-width: 96px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border-right: 1px solid #faf3e0;
+      overflow: hidden;
+      aspect-ratio: 1/1;
+    }
 
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: opacity 0.3s ease;
     }
+
+    .gallery-item:hover img { opacity: 0.85; }
 
     /* ── 拡大オーバーレイ ── */
     .gallery-overlay {
@@ -240,9 +244,7 @@
       cursor: zoom-out;
     }
 
-    .gallery-overlay.active {
-      display: flex;
-    }
+    .gallery-overlay.active { display: flex; }
 
     .gallery-full {
       max-width: 92%;
@@ -254,21 +256,20 @@
     /* ── コンテンツ本体 ── */
     .modal-content {
       padding: clamp(24px, 5vw, 48px) clamp(20px, 6vw, 40px);
-      color: #3d2010;
     }
 
     .modal-title {
       font-size: clamp(1.3rem, 4vw, 1.6rem);
       font-weight: 400;
       letter-spacing: 0.3em;
-      color: #3d2010;
+      color: var(--color-dark);
       margin-bottom: 8px;
     }
 
     .modal-caption {
       font-size: clamp(0.65rem, 2vw, 0.75rem);
       letter-spacing: 0.15em;
-      color: #9a7040;
+      color: var(--color-mid);
       margin-bottom: 28px;
     }
 
@@ -277,7 +278,7 @@
       font-weight: 400;
       letter-spacing: 0.05em;
       line-height: 2.2;
-      color: #3d2010;
+      color: var(--color-dark);
       margin-bottom: 36px;
       word-break: normal;
       overflow-wrap: break-word;
@@ -293,7 +294,7 @@
     .modal-hours-title {
       font-size: clamp(0.6rem, 1.8vw, 0.7rem);
       letter-spacing: 0.3em;
-      color: #9a7040;
+      color: var(--color-mid);
       margin-bottom: 16px;
     }
 
@@ -304,7 +305,7 @@
       font-size: clamp(0.75rem, 2.2vw, 0.85rem);
       letter-spacing: 0.03em;
       line-height: 2;
-      color: #3d2010;
+      color: var(--color-dark);
       gap: 8px;
     }
 
@@ -334,7 +335,7 @@
       font-family: 'Zen Old Mincho', serif;
       font-size: clamp(0.72rem, 2vw, 0.82rem);
       letter-spacing: 0.15em;
-      color: #3d2010;
+      color: var(--color-dark);
       text-decoration: none;
       transition: background-color 0.3s ease, color 0.3s ease;
       word-break: keep-all;
@@ -351,7 +352,7 @@
       padding: 24px;
       text-align: center;
       margin-bottom: 40px;
-      color: #b5aa98;
+      color: var(--color-mid);
       font-size: 0.7rem;
       letter-spacing: 0.3em;
     }
@@ -378,12 +379,10 @@
       background: none;
       width: 100%;
       font-family: 'Zen Old Mincho', serif;
-      color: #3d2010;
+      color: var(--color-dark);
     }
 
-    .footer-btn:hover {
-      background-color: rgba(44, 44, 44, 0.08);
-    }
+    .footer-btn:hover { background-color: rgba(44, 44, 44, 0.08); }
 
     .footer-btn-icon {
       font-size: 1.1rem;
@@ -399,19 +398,20 @@
     .footer-btn-label {
       font-size: clamp(0.58rem, 1.6vw, 0.65rem);
       letter-spacing: 0.25em;
-      opacity: 0.65;
+      color: var(--color-mid);
     }
 
     .footer-btn-text {
       font-size: clamp(0.72rem, 2vw, 0.8rem);
       letter-spacing: 0.05em;
       line-height: 1.5;
+      color: var(--color-dark);
     }
 
     .footer-btn-hint {
       font-size: 0.58rem;
       letter-spacing: 0.1em;
-      opacity: 0.55;
+      color: var(--color-mid);
       margin-top: 2px;
     }
 
@@ -422,8 +422,7 @@
       font-family: 'Zen Old Mincho', serif;
       font-size: 0.65rem;
       letter-spacing: 0.4em;
-      color: #3d2010;
-      opacity: 0.45;
+      color: var(--color-mid);
       padding: 20px 0 32px;
       cursor: pointer;
       background: none;
@@ -432,7 +431,7 @@
       transition: opacity 0.3s ease;
     }
 
-    .modal-back:hover { opacity: 0.7; }
+    .modal-back:hover { opacity: 0.6; }
 
     /* ── イントロ ── */
     .intro {
@@ -530,27 +529,25 @@
   <div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
-      <!-- メイン画像 -->
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed.webp" alt="若草">
       </div>
 
-      <!-- 横スクロールギャラリー -->
-      <!-- 画像を差し替える場合は各srcのパスを変更してください -->
+      <!-- エンドレス横スクロールギャラリー -->
+      <!-- 画像を差し替える場合は menu-01〜05.jpg を変更してください -->
       <div class="gallery-scroll">
-        <div class="gallery-inner">
-          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg')">
-            <img src="./images/menu-01.jpg" alt="若草 写真1">
-          </div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg')">
-            <img src="./images/menu-02.jpg" alt="若草 写真2">
-          </div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg')">
-            <img src="./images/menu-03.jpg" alt="若草 写真3">
-          </div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg')">
-            <img src="./images/menu-04.jpg" alt="若草 写真4">
-          </div>
+        <div class="gallery-track" id="gallery-wakakusa">
+          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg', event)"><img src="./images/menu-01.jpg" alt="若草1"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg', event)"><img src="./images/menu-02.jpg" alt="若草2"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg', event)"><img src="./images/menu-03.jpg" alt="若草3"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg', event)"><img src="./images/menu-04.jpg" alt="若草4"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-05.jpg', event)"><img src="./images/menu-05.jpg" alt="若草5"></div>
+          <!-- 以下は複製（エンドレス用）-->
+          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg', event)"><img src="./images/menu-01.jpg" alt="若草1"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg', event)"><img src="./images/menu-02.jpg" alt="若草2"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg', event)"><img src="./images/menu-03.jpg" alt="若草3"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg', event)"><img src="./images/menu-04.jpg" alt="若草4"></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-05.jpg', event)"><img src="./images/menu-05.jpg" alt="若草5"></div>
         </div>
       </div>
 
@@ -566,7 +563,6 @@
           <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
-        <!-- 予約導線：リンク先はhrefを変更してください -->
         <div class="modal-reserve">
           <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">お席のご案内<br>DMにて承ります</a>
           <a class="btn-reserve" href="tel:054-397-4993">お電話でのご予約<br>054-397-4993</a>
@@ -608,27 +604,25 @@
   <div class="modal" id="modal-cree" onclick="closeModal('cree')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
-      <!-- メイン画像 -->
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
       </div>
 
-      <!-- 横スクロールギャラリー -->
-      <!-- 画像を差し替える場合は各srcのパスを変更してください -->
+      <!-- エンドレス横スクロールギャラリー -->
+      <!-- 画像を差し替える場合は creer-01〜05.jpg を変更してください -->
       <div class="gallery-scroll">
-        <div class="gallery-inner">
-          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg')">
-            <img src="./images/creer-01.jpg" alt="Creer 写真1">
-          </div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg')">
-            <img src="./images/creer-02.jpg" alt="Creer 写真2">
-          </div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg')">
-            <img src="./images/creer-03.jpg" alt="Creer 写真3">
-          </div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg')">
-            <img src="./images/creer-04.jpg" alt="Creer 写真4">
-          </div>
+        <div class="gallery-track" id="gallery-cree">
+          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt="Creer1"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt="Creer2"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt="Creer3"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt="Creer4"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt="Creer5"></div>
+          <!-- 以下は複製（エンドレス用）-->
+          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt="Creer1"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt="Creer2"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt="Creer3"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt="Creer4"></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt="Creer5"></div>
         </div>
       </div>
 
@@ -644,13 +638,11 @@
           <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
-        <!-- コンタクト：リンク先はhrefを変更してください -->
         <div class="modal-reserve">
           <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">Contact / DM</a>
           <a class="btn-reserve" href="tel:054-397-4993">Contact / TEL<br>054-397-4993</a>
         </div>
 
-        <!-- 通販エリア（準備中）：将来的に差し替えてください -->
         <div class="modal-shop">online shop — 準備中</div>
 
         <div class="modal-footer">
@@ -685,7 +677,7 @@
     </div>
   </div>
 
- <!-- 拡大表示オーバーレイ -->
+  <!-- 拡大表示オーバーレイ -->
   <div class="gallery-overlay" id="gallery-overlay" onclick="closeGallery()">
     <img class="gallery-full" id="gallery-full-img" src="" alt="">
   </div>
@@ -693,7 +685,6 @@
   <script>
     const isLineBrowser = navigator.userAgent.indexOf('Line') !== -1 ||
                           navigator.userAgent.indexOf('FBAN') !== -1;
-
     const closeBtn = document.getElementById('modal-close-btn');
 
     function openModal(name) {
@@ -718,10 +709,10 @@
       });
     }
 
-    function openGallery(src) {
+    function openGallery(src, e) {
+      e.stopPropagation();
       document.getElementById('gallery-full-img').src = src;
       document.getElementById('gallery-overlay').classList.add('active');
-      event.stopPropagation();
     }
 
     function closeGallery() {
