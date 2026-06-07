@@ -10,9 +10,7 @@
     :root {
       --color-bg:      #dcd6c8;
       --color-text:    #2c2c2c;
-      --color-accent:  #8a6c2a;
       --color-sub:     #4a4540;
-      --color-border:  #2e2b26;
       --logo-wakakusa: url('https://i.imgur.com/ZV6YwqD.png');
     }
 
@@ -41,7 +39,7 @@
       mix-blend-mode: multiply;
     }
 
-    /* ── 閉じるボタン（固定・常に見える）── */
+    /* ── 閉じるボタン ── */
     .modal-close {
       position: fixed;
       top: 20px;
@@ -60,34 +58,9 @@
       color: rgba(240, 220, 180, 0.85);
       transition: opacity 0.3s ease;
       z-index: 150;
-      pointer-events: all;
     }
 
-    .modal-close:hover {
-      opacity: 0.6;
-    }
-
-    /* 戻るボタン（下部）*/
-    .modal-back {
-      display: block;
-      text-align: center;
-      font-family: 'Zen Old Mincho', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      color: inherit;
-      opacity: 0.45;
-      padding: 20px 0 8px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      width: 100%;
-      transition: opacity 0.3s ease;
-      text-decoration: none;
-    }
-
-    .modal-back:hover {
-      opacity: 0.7;
-    }
+    .modal-close:hover { opacity: 0.6; }
 
     /* ── 短冊エリア ── */
     .stage {
@@ -192,100 +165,14 @@
     .modal-inner {
       width: 90%;
       max-width: 480px;
-      text-decoration: none;
       display: block;
-    }
-
-    /* 若草：炭・蜜蝋・炉端の灯り */
-    #modal-wakakusa {
-      background-color: rgba(26, 15, 10, 0.97);
-    }
-
-    #modal-wakakusa .modal-inner {
       background-color: #faf3e0;
     }
 
-    #modal-wakakusa .modal-title,
-    #modal-wakakusa .modal-text,
-    #modal-wakakusa .modal-hours-row,
-    #modal-wakakusa .modal-footer-item {
-      color: #3d2010;
-    }
-
-    #modal-wakakusa .modal-caption,
-    #modal-wakakusa .modal-hours-title,
-    #modal-wakakusa .modal-footer-label {
-      color: #9a7040;
-    }
-
-    #modal-wakakusa .modal-hours,
-    #modal-wakakusa .modal-footer {
-      border-top-color: #2c2c2c;
-    }
-
-    #modal-wakakusa .btn-reserve {
-      border-color: #2c2c2c;
-      color: #3d2010;
-      letter-spacing: 0.2em;
-    }
-
-    #modal-wakakusa .btn-reserve:hover {
-      background-color: #2c2c2c;
-      color: #faf3e0;
-    }
-
-    #modal-wakakusa .modal-shop-placeholder {
-      border-color: #d4a870 !important;
-    }
-
-    #modal-wakakusa .modal-shop-placeholder p {
-      color: #d4a870 !important;
-    }
-
-    /* Creer：若草と統一 */
+    /* 両モーダル共通配色 */
+    #modal-wakakusa,
     #modal-cree {
       background-color: rgba(26, 15, 10, 0.97);
-    }
-
-    #modal-cree .modal-inner {
-      background-color: #faf3e0;
-    }
-
-    #modal-cree .modal-title,
-    #modal-cree .modal-text,
-    #modal-cree .modal-hours-row,
-    #modal-cree .modal-footer-item {
-      color: #3d2010;
-    }
-
-    #modal-cree .modal-caption,
-    #modal-cree .modal-hours-title,
-    #modal-cree .modal-footer-label {
-      color: #9a7040;
-    }
-
-    #modal-cree .modal-hours,
-    #modal-cree .modal-footer {
-      border-top-color: #2c2c2c;
-    }
-
-    #modal-cree .btn-reserve {
-      border-color: #2c2c2c;
-      color: #3d2010;
-      letter-spacing: 0.2em;
-    }
-
-    #modal-cree .btn-reserve:hover {
-      background-color: #2c2c2c;
-      color: #faf3e0;
-    }
-
-    #modal-cree .modal-shop-placeholder {
-      border-color: #d4a870 !important;
-    }
-
-    #modal-cree .modal-shop-placeholder p {
-      color: #d4a870 !important;
     }
 
     /* メイン画像 */
@@ -303,23 +190,85 @@
       display: block;
     }
 
-    /* コンテンツ本体 */
+    /* ── 横スクロールギャラリー ── */
+    .gallery-scroll {
+      width: 100%;
+      overflow-x: auto;
+      background-color: #1a0f0a;
+      padding: 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+
+    .gallery-inner {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+    }
+
+    .gallery-item {
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 3px solid #faf3e0;
+      overflow: hidden;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover { opacity: 0.8; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── 拡大オーバーレイ ── */
+    .gallery-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(10, 6, 4, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+      cursor: zoom-out;
+    }
+
+    .gallery-overlay.active {
+      display: flex;
+    }
+
+    .gallery-full {
+      max-width: 92%;
+      max-height: 85vh;
+      object-fit: contain;
+      border: 2px solid rgba(240, 220, 180, 0.3);
+    }
+
+    /* ── コンテンツ本体 ── */
     .modal-content {
       padding: clamp(24px, 5vw, 48px) clamp(20px, 6vw, 40px);
+      color: #3d2010;
     }
 
     .modal-title {
       font-size: clamp(1.3rem, 4vw, 1.6rem);
       font-weight: 400;
       letter-spacing: 0.3em;
-      color: var(--color-text);
+      color: #3d2010;
       margin-bottom: 8px;
     }
 
     .modal-caption {
       font-size: clamp(0.65rem, 2vw, 0.75rem);
       letter-spacing: 0.15em;
-      color: var(--color-sub);
+      color: #9a7040;
       margin-bottom: 28px;
     }
 
@@ -328,13 +277,13 @@
       font-weight: 400;
       letter-spacing: 0.05em;
       line-height: 2.2;
-      color: var(--color-text);
+      color: #3d2010;
       margin-bottom: 36px;
       word-break: normal;
       overflow-wrap: break-word;
     }
 
-    /* 営業時間 */
+    /* ── 営業時間 ── */
     .modal-hours {
       margin-bottom: 36px;
       border-top: 1px solid #2c2c2c;
@@ -344,7 +293,7 @@
     .modal-hours-title {
       font-size: clamp(0.6rem, 1.8vw, 0.7rem);
       letter-spacing: 0.3em;
-      color: var(--color-sub);
+      color: #9a7040;
       margin-bottom: 16px;
     }
 
@@ -355,7 +304,7 @@
       font-size: clamp(0.75rem, 2.2vw, 0.85rem);
       letter-spacing: 0.03em;
       line-height: 2;
-      color: var(--color-text);
+      color: #3d2010;
       gap: 8px;
     }
 
@@ -369,8 +318,7 @@
       text-align: right;
     }
 
-    /* ── 予約ボタンエリア ── */
-    /* 将来的に予約システムへ切り替える際はhrefのURLを変更してください */
+    /* ── 予約・コンタクトボタン ── */
     .modal-reserve {
       display: flex;
       flex-direction: column;
@@ -381,30 +329,41 @@
     .btn-reserve {
       display: block;
       text-align: center;
-      border: 1px solid var(--color-text);
+      border: 1px solid #2c2c2c;
       padding: 14px 16px;
       font-family: 'Zen Old Mincho', serif;
       font-size: clamp(0.72rem, 2vw, 0.82rem);
       letter-spacing: 0.15em;
-      color: var(--color-text);
+      color: #3d2010;
       text-decoration: none;
       transition: background-color 0.3s ease, color 0.3s ease;
       word-break: keep-all;
     }
 
     .btn-reserve:hover {
-      background-color: var(--color-text);
-      color: #dcd6c8;
+      background-color: #2c2c2c;
+      color: #faf3e0;
     }
 
-    /* ══ フッターリンク ══ */
+    /* ── 通販エリア ── */
+    .modal-shop {
+      border: 1px dashed #b5aa98;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #b5aa98;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+    }
+
+    /* ── フッターリンク ── */
     .modal-footer {
       border-top: 1px solid #2c2c2c;
       padding-top: 24px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      padding-bottom: 40px;
+      padding-bottom: 16px;
     }
 
     .footer-btn {
@@ -412,25 +371,23 @@
       align-items: center;
       gap: 12px;
       padding: 14px 16px;
-      border: 1px solid currentColor;
+      border: 1px solid #2c2c2c;
       text-decoration: none;
-      transition: background-color 0.3s ease, opacity 0.3s ease;
+      transition: background-color 0.3s ease;
       cursor: pointer;
       background: none;
       width: 100%;
-      text-align: left;
       font-family: 'Zen Old Mincho', serif;
+      color: #3d2010;
     }
 
-    .footer-btn:hover,
-    .footer-btn:active {
-      opacity: 0.7;
+    .footer-btn:hover {
+      background-color: rgba(44, 44, 44, 0.08);
     }
 
     .footer-btn-icon {
       font-size: 1.1rem;
       flex-shrink: 0;
-      line-height: 1;
     }
 
     .footer-btn-body {
@@ -458,29 +415,26 @@
       margin-top: 2px;
     }
 
-    /* 若草フッターボタン色 */
-    #modal-wakakusa .footer-btn {
+    /* ── 閉じるボタン（下部）── */
+    .modal-back {
+      display: block;
+      text-align: center;
+      font-family: 'Zen Old Mincho', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
       color: #3d2010;
-      border-color: #2c2c2c;
+      opacity: 0.45;
+      padding: 20px 0 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      transition: opacity 0.3s ease;
     }
 
-    #modal-wakakusa .footer-btn:hover {
-      background-color: rgba(44, 44, 44, 0.08);
-      opacity: 1;
-    }
+    .modal-back:hover { opacity: 0.7; }
 
-    /* Creerフッターボタン色（若草と統一） */
-    #modal-cree .footer-btn {
-      color: #3d2010;
-      border-color: #2c2c2c;
-    }
-
-    #modal-cree .footer-btn:hover {
-      background-color: rgba(44, 44, 44, 0.08);
-      opacity: 1;
-    }
-
-    /* イントロ */
+    /* ── イントロ ── */
     .intro {
       position: fixed;
       top: 0; left: 0;
@@ -499,17 +453,16 @@
       pointer-events: none;
     }
 
-    /* 季節ごとに差し替える背景画像 */
     .intro-bg {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
+      /* 季節ごとに差し替えてください */
       background-image: url('./images/unnamed%20(1).jpg');
       background-size: cover;
       background-position: center;
     }
 
-    /* 文字を読みやすくする暗幕 */
     .intro-overlay {
       position: absolute;
       top: 0; left: 0;
@@ -535,15 +488,15 @@
 </head>
 <body>
 
-  <!-- イントロ画面：季節ごとに画像URLとテキストを書き換えてください -->
+  <!-- イントロ：季節ごとに画像・テキストを書き換えてください -->
   <div class="intro" id="intro">
     <div class="intro-bg"></div>
     <div class="intro-overlay"></div>
     <p class="intro-copy">食と喫茶、日々の集い</p>
   </div>
 
-  <!-- 共通閉じるボタン（固定・モーダル開時のみ表示）-->
-  <button class="modal-close" style="display:none;" onclick="closeModal(this.getAttribute('data-modal'))">✕</button>
+  <!-- 共通閉じるボタン -->
+  <button class="modal-close" id="modal-close-btn" onclick="closeModal(this.getAttribute('data-modal'))">✕</button>
 
   <!-- 短冊エリア -->
   <div class="stage">
@@ -577,21 +530,35 @@
   <div class="modal" id="modal-wakakusa" onclick="closeModal('wakakusa')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
-      <!-- 若草メイン画像 -->
+      <!-- メイン画像 -->
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed.webp" alt="若草">
       </div>
 
-      <div class="modal-content">
+      <!-- 横スクロールギャラリー -->
+      <!-- 画像を差し替える場合は各srcのパスを変更してください -->
+      <div class="gallery-scroll">
+        <div class="gallery-inner">
+          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg')">
+            <img src="./images/menu-01.jpg" alt="若草 写真1">
+          </div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg')">
+            <img src="./images/menu-02.jpg" alt="若草 写真2">
+          </div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg')">
+            <img src="./images/menu-03.jpg" alt="若草 写真3">
+          </div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg')">
+            <img src="./images/menu-04.jpg" alt="若草 写真4">
+          </div>
+        </div>
+      </div>
 
+      <div class="modal-content">
         <h2 class="modal-title">若草</h2>
         <p class="modal-caption">食と喫茶　静岡市葵区伝馬町</p>
+        <p class="modal-text">灯りと器に囲まれた空間で、家庭料理と喫茶をお楽しみください。骨董品に囲まれたカウンターで、ゆったりと流れる時間をどうぞ。</p>
 
-        <p class="modal-text">
-          灯りと器に囲まれた空間で、家庭料理と喫茶をお楽しみください。骨董品に囲まれたカウンターで、ゆったりと流れる時間をどうぞ。
-        </p>
-
-        <!-- 営業時間 -->
         <div class="modal-hours">
           <p class="modal-hours-title">営　業　時　間</p>
           <div class="modal-hours-row"><span>火・水・木・日</span><span>12:00 — 21:00</span></div>
@@ -599,21 +566,13 @@
           <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
-        <!-- 予約導線エリア：リンク先はここだけ書き換えてください -->
+        <!-- 予約導線：リンク先はhrefを変更してください -->
         <div class="modal-reserve">
-          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">
-            お席のご案内<br>DMにて承ります
-          </a>
-          <a class="btn-reserve" href="tel:054-397-4993">
-            お電話でのご予約<br>054-397-4993
-          </a>
+          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">お席のご案内<br>DMにて承ります</a>
+          <a class="btn-reserve" href="tel:054-397-4993">お電話でのご予約<br>054-397-4993</a>
         </div>
-        <!-- 予約導線エリア ここまで -->
 
-        <!-- 共通フッター -->
         <div class="modal-footer">
-
-          <!-- MAP：住所テキストでGoogleマップへ -->
           <a class="footer-btn" href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
             <span class="footer-btn-icon">📍</span>
             <span class="footer-btn-body">
@@ -622,8 +581,6 @@
               <span class="footer-btn-hint">タップしてGoogleマップで開く</span>
             </span>
           </a>
-
-          <!-- TEL -->
           <a class="footer-btn" href="tel:054-397-4993">
             <span class="footer-btn-icon">📞</span>
             <span class="footer-btn-body">
@@ -632,8 +589,6 @@
               <span class="footer-btn-hint">タップして電話する</span>
             </span>
           </a>
-
-          <!-- SNS -->
           <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
             <span class="footer-btn-icon">📷</span>
             <span class="footer-btn-body">
@@ -642,12 +597,9 @@
               <span class="footer-btn-hint">タップしてInstagramを開く</span>
             </span>
           </a>
-
         </div>
 
-        <!-- 戻るボタン -->
         <button class="modal-back" onclick="closeModal('wakakusa')">— 閉じる —</button>
-
       </div>
     </div>
   </div>
@@ -656,21 +608,35 @@
   <div class="modal" id="modal-cree" onclick="closeModal('cree')">
     <div class="modal-inner" onclick="event.stopPropagation()">
 
-      <!-- Creerメイン画像 -->
+      <!-- メイン画像 -->
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
       </div>
 
-      <div class="modal-content">
+      <!-- 横スクロールギャラリー -->
+      <!-- 画像を差し替える場合は各srcのパスを変更してください -->
+      <div class="gallery-scroll">
+        <div class="gallery-inner">
+          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg')">
+            <img src="./images/creer-01.jpg" alt="Creer 写真1">
+          </div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg')">
+            <img src="./images/creer-02.jpg" alt="Creer 写真2">
+          </div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg')">
+            <img src="./images/creer-03.jpg" alt="Creer 写真3">
+          </div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg')">
+            <img src="./images/creer-04.jpg" alt="Creer 写真4">
+          </div>
+        </div>
+      </div>
 
+      <div class="modal-content">
         <h2 class="modal-title">Creer</h2>
         <p class="modal-caption">gallery &amp; space　静岡市葵区伝馬町</p>
+        <p class="modal-text">器と、光と、静けさと。骨董品と工芸品が静かに並ぶ空間で、あなただけの一点をお探しください。</p>
 
-        <p class="modal-text">
-          器と、光と、静けさと。骨董品と工芸品が静かに並ぶ空間で、あなただけの一点をお探しください。
-        </p>
-
-        <!-- 営業時間 -->
         <div class="modal-hours">
           <p class="modal-hours-title">営　業　時　間</p>
           <div class="modal-hours-row"><span>火・水・木・日</span><span>12:00 — 21:00</span></div>
@@ -678,27 +644,16 @@
           <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
-        <!-- コンタクトエリア：リンク先はここだけ書き換えてください -->
+        <!-- コンタクト：リンク先はhrefを変更してください -->
         <div class="modal-reserve">
-          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">
-            Contact / DM
-          </a>
-          <a class="btn-reserve" href="tel:054-397-4993">
-            Contact / TEL<br>054-397-4993
-          </a>
+          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">Contact / DM</a>
+          <a class="btn-reserve" href="tel:054-397-4993">Contact / TEL<br>054-397-4993</a>
         </div>
-        <!-- コンタクトエリア ここまで -->
 
-        <!-- 通販エリア（準備中）：将来的に画像・購入ボタンに差し替えてください -->
-        <div class="modal-shop-placeholder" style="border:1px dashed #b5aa98; padding:24px; text-align:center; margin-bottom:40px;">
-          <p style="font-size:0.7rem; letter-spacing:0.3em; color:#b5aa98;">online shop — 準備中</p>
-        </div>
-        <!-- 通販エリア ここまで -->
+        <!-- 通販エリア（準備中）：将来的に差し替えてください -->
+        <div class="modal-shop">online shop — 準備中</div>
 
-        <!-- 共通フッター -->
         <div class="modal-footer">
-
-          <!-- MAP -->
           <a class="footer-btn" href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
             <span class="footer-btn-icon">📍</span>
             <span class="footer-btn-body">
@@ -707,8 +662,6 @@
               <span class="footer-btn-hint">タップしてGoogleマップで開く</span>
             </span>
           </a>
-
-          <!-- TEL -->
           <a class="footer-btn" href="tel:054-397-4993">
             <span class="footer-btn-icon">📞</span>
             <span class="footer-btn-body">
@@ -717,8 +670,6 @@
               <span class="footer-btn-hint">タップして電話する</span>
             </span>
           </a>
-
-          <!-- SNS -->
           <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
             <span class="footer-btn-icon">📷</span>
             <span class="footer-btn-body">
@@ -727,108 +678,70 @@
               <span class="footer-btn-hint">タップしてInstagramを開く</span>
             </span>
           </a>
-
         </div>
 
-        <!-- 戻るボタン -->
         <button class="modal-back" onclick="closeModal('cree')">— 閉じる —</button>
-
       </div>
     </div>
   </div>
 
+ <!-- 拡大表示オーバーレイ -->
+  <div class="gallery-overlay" id="gallery-overlay" onclick="closeGallery()">
+    <img class="gallery-full" id="gallery-full-img" src="" alt="">
+  </div>
+
   <script>
-    // LINEブラウザ検出
-    const isLineBrowser = navigator.userAgent.indexOf('Line') !== -1 || 
+    const isLineBrowser = navigator.userAgent.indexOf('Line') !== -1 ||
                           navigator.userAgent.indexOf('FBAN') !== -1;
 
+    const closeBtn = document.getElementById('modal-close-btn');
+
     function openModal(name) {
-      const modal = document.getElementById('modal-' + name);
-      modal.classList.add('active');
+      document.getElementById('modal-' + name).classList.add('active');
       document.body.style.overflow = 'hidden';
-      // 閉じるボタン表示
-      document.querySelectorAll('.modal-close').forEach(btn => {
-        btn.setAttribute('data-modal', name);
-        btn.style.display = 'flex';
-      });
-      // LINE以外でHistory API使用
-      if (!isLineBrowser) {
-        history.pushState({ modal: name }, '', '');
-      }
+      closeBtn.setAttribute('data-modal', name);
+      closeBtn.style.display = 'flex';
+      if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
     }
 
     function closeModal(name) {
-      const modal = document.getElementById('modal-' + name);
-      modal.classList.remove('active');
+      document.getElementById('modal-' + name).classList.remove('active');
       document.body.style.overflow = '';
-      // 閉じるボタン非表示
-      document.querySelectorAll('.modal-close').forEach(btn => {
-        btn.style.display = 'none';
+      closeBtn.style.display = 'none';
+    }
+
+    if (!isLineBrowser) {
+      window.addEventListener('popstate', function() {
+        document.querySelectorAll('.modal.active').forEach(m => {
+          closeModal(m.id.replace('modal-', ''));
+        });
       });
     }
 
-    // 戻るボタン（Chrome・Safari）でモーダルを閉じる
-    if (!isLineBrowser) {
-      window.addEventListener('popstate', function(e) {
-        const modals = document.querySelectorAll('.modal.active');
-        modals.forEach(modal => {
-          const name = modal.id.replace('modal-', '');
-          closeModal(name);
-        });
-      });
+    function openGallery(src) {
+      document.getElementById('gallery-full-img').src = src;
+      document.getElementById('gallery-overlay').classList.add('active');
+      event.stopPropagation();
+    }
+
+    function closeGallery() {
+      document.getElementById('gallery-overlay').classList.remove('active');
     }
 
     // イントロ演出
     const intro = document.getElementById('intro');
     const introCopy = document.querySelector('.intro-copy');
-
-    introCopy.classList.add('show');
+    let introTimer = setTimeout(hideIntro, 5000);
 
     function hideIntro() {
+      clearTimeout(introTimer);
       intro.classList.add('hide');
-      // フェードアウト完了後に完全非表示
-      setTimeout(() => {
-        intro.style.display = 'none';
-      }, 2600);
+      setTimeout(() => { intro.style.display = 'none'; }, 2500);
     }
 
-    setTimeout(hideIntro, 5000);
+    introCopy.classList.add('show');
     intro.addEventListener('click', hideIntro);
   </script>
-<style>
-  /* 無限ループ用：既存のデザインを壊さないよう独立したクラスで定義 */
-  .added-loop-wrap { position: relative; width: 100%; overflow: hidden; padding: 20px 0; z-index: 10; }
-  .added-loop-inner { display: flex; width: 200%; animation: scroll 20s linear infinite; }
-  .added-loop-item { width: 25%; padding: 0 5px; cursor: pointer; }
-  .added-loop-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 4px; border: 1px solid #c8c0b0; }
-  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-  
-  /* タップ拡大用オーバーレイ */
-  #added-full-view { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; z-index:9999; cursor:zoom-out; }
-  #added-full-view img { max-width:90%; max-height:80%; border: 3px solid #fff; }
-</style>
-
-<div class="added-loop-wrap">
-  <div class="added-loop-inner">
-    <div class="added-loop-item"><img src="./images/menu-01.jpg" onclick="showAddedFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-02.jpg" onclick="showAddedFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-03.jpg" onclick="showAddedFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-04.jpg" onclick="showAddedFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-01.jpg" onclick="showAddedFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-02.jpg" onclick="showAddedFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-03.jpg" onclick="showFull(this.src)"></div>
-    <div class="added-loop-item"><img src="./images/menu-04.jpg" onclick="showAddedFull(this.src)"></div>
-  </div>
-</div>
-
-<div id="added-full-view" onclick="this.style.display='none'"><img id="added-full-img" src=""></div>
-
-<script>
-  function showAddedFull(src) {
-    document.getElementById('added-full-img').src = src;
-    document.getElementById('added-full-view').style.display = 'flex';
-  }
-</script>
 
 </body>
 </html>
