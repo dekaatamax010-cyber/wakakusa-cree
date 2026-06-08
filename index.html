@@ -75,17 +75,19 @@
     }
 
     .tanzaku {
-      width: 120px;
-      height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: opacity 0.8s ease;
-    }
+  width: 120px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter 0.6s ease;
+  filter: brightness(0.85);
+}
 
-    .tanzaku:hover { opacity: 0.95; }
-
+.tanzaku:hover {
+  filter: brightness(1.12);
+}
     .tanzaku-name {
       width: 80%;
       height: 85%;
