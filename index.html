@@ -30,6 +30,19 @@
       justify-content: center;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      opacity: 0.85;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.35' numOctaves='6' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      mix-blend-mode: multiply;
+    }
+
     /* ── 閉じるボタン ── */
     .modal-close {
       position: fixed;
@@ -62,19 +75,56 @@
     }
 
     .tanzaku {
-  width: 120px;
-  height: 360px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: filter 0.6s ease;
-  filter: brightness(0.82);
+      width: 120px;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: filter 0.9s ease;
+      filter: brightness(0.58) sepia(0.25);
     }
 
-.tanzaku:hover {
-  filter: brightness(1.12);
-}
+    /* 暗幕オーバーレイ（常時）*/
+    .tanzaku::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(0, 0, 0, 0.35) 100%
+      );
+      transition: background 0.9s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* スポットライト点灯時 */
+    .tanzaku.spotlight {
+      filter: brightness(1.1) sepia(0.1);
+    }
+
+    .tanzaku.spotlight::before {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 210, 130, 0.5) 0%,
+        rgba(255, 185, 80, 0.22) 40%,
+        rgba(0, 0, 0, 0.0) 75%,
+        rgba(0, 0, 0, 0.05) 100%
+      );
+    }
+
+    /* 短冊内コンテンツはオーバーレイより上 */
+    .tanzaku-name,
+    .tanzaku-name-cree {
+      position: relative;
+      z-index: 2;
+    }
+
     .tanzaku-name {
       width: 80%;
       height: 85%;
@@ -639,87 +689,6 @@
         </div>
 
         <div class="modal-reserve">
-          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">お席のご案内<br>DMにて承ります</a>
-          <a class="btn-reserve" href="tel:054-397-4993">お電話でのご予約<br>054-397-4993</a>
-        </div>
-
-        <div class="modal-footer">
-          <a class="footer-btn" href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
-            <span class="footer-btn-icon">📍</span>
-            <span class="footer-btn-body">
-              <span class="footer-btn-label">MAP</span>
-              <span class="footer-btn-text">静岡県静岡市葵区伝馬町10-35</span>
-              <span class="footer-btn-hint">タップしてGoogleマップで開く</span>
-            </span>
-          </a>
-          <a class="footer-btn" href="tel:054-397-4993">
-            <span class="footer-btn-icon">📞</span>
-            <span class="footer-btn-body">
-              <span class="footer-btn-label">TEL</span>
-              <span class="footer-btn-text">054-397-4993</span>
-              <span class="footer-btn-hint">タップして電話する</span>
-            </span>
-          </a>
-          <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
-            <span class="footer-btn-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
-            <span class="footer-btn-body">
-              <span class="footer-btn-label">Instagram</span>
-              <span class="footer-btn-text">@creer_shizuoka</span>
-              <span class="footer-btn-hint">タップしてInstagramを開く</span>
-            </span>
-          </a>
-        </div>
-
-        <button class="modal-back" onclick="closeModal('wakakusa')">— 閉じる —</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Creerモーダル -->
-  <div class="modal" id="modal-cree" onclick="closeModal('cree')">
-    <div class="modal-inner" onclick="event.stopPropagation()">
-
-      <div class="modal-image-wrap">
-        <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
-      </div>
-
-      <!-- エンドレス横スクロールギャラリー -->
-      <!-- 画像を差し替える場合は creer-01〜05.jpg を変更してください -->
-      <div class="gallery-scroll">
-        <div class="gallery-track" id="gallery-cree">
-          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt="Creer1"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt="Creer2"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt="Creer3"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt="Creer4"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt="Creer5"></div>
-          <!-- 以下は複製（エンドレス用）-->
-          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt="Creer1"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt="Creer2"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt="Creer3"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt="Creer4"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt="Creer5"></div>
-        </div>
-      </div>
-
-      <div class="modal-content">
-        <h2 class="modal-title">Creer</h2>
-        <p class="modal-caption">gallery &amp; space　静岡市葵区伝馬町</p>
-        <p class="modal-text">器と、光と、静けさと。骨董品と工芸品が静かに並ぶ空間で、あなただけの一点をお探しください。</p>
-
-        <div class="modal-hours">
-          <p class="modal-hours-title">営　業　時　間</p>
-          <div class="modal-hours-row"><span>火・水・木・日</span><span>12:00 — 21:00</span></div>
-          <div class="modal-hours-row"><span>金・土</span><span>12:00 — 23:00</span></div>
-          <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
-        </div>
-
-        <div class="modal-reserve">
           <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">Contact / DM</a>
           <a class="btn-reserve" href="tel:054-397-4993">Contact / TEL<br>054-397-4993</a>
         </div>
@@ -776,11 +745,30 @@
     const closeBtn = document.getElementById('modal-close-btn');
 
     function openModal(name) {
-      document.getElementById('modal-' + name).classList.add('active');
-      document.body.style.overflow = 'hidden';
-      closeBtn.setAttribute('data-modal', name);
-      closeBtn.style.display = 'flex';
-      if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
+      // スポットライト演出
+      const tanzaku = document.querySelector('.tanzaku.' + name === 'wakakusa' ? '.wakakusa' : '.cree');
+      document.querySelectorAll('.tanzaku').forEach(t => t.classList.remove('spotlight'));
+
+      // タップされた短冊を特定してspotlight付与
+      const target = name === 'wakakusa'
+        ? document.querySelector('.wakakusa')
+        : document.querySelector('.cree');
+
+      if (target) target.classList.add('spotlight');
+
+      // 1秒の間を置いてからモーダルを開く
+      setTimeout(() => {
+        document.getElementById('modal-' + name).classList.add('active');
+        document.body.style.overflow = 'hidden';
+        closeBtn.setAttribute('data-modal', name);
+        closeBtn.style.display = 'flex';
+        if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
+
+        // モーダルが開いたらspotlightを戻す
+        setTimeout(() => {
+          if (target) target.classList.remove('spotlight');
+        }, 800);
+      }, 900);
     }
 
     function closeModal(name) {
