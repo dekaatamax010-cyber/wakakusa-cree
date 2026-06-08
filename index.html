@@ -75,40 +75,15 @@
     }
 
     .tanzaku {
-      width: 120px;
-      height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: filter 0.9s ease;
-      filter: brightness(0.58) sepia(0.25);
+  width: 120px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.8s ease;
     }
 
-    /* 暗幕オーバーレイ（常時）*/
-    .tanzaku::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.15) 0%,
-        rgba(0, 0, 0, 0.35) 100%
-      );
-      transition: background 0.9s ease;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* スポットライト点灯時 */
-    .tanzaku.spotlight {
-      filter: brightness(1.1) sepia(0.1);
-    }
-
-    .tanzaku.spotlight::before {
       background: linear-gradient(
         to bottom,
         rgba(255, 210, 130, 0.5) 0%,
@@ -745,30 +720,11 @@
     const closeBtn = document.getElementById('modal-close-btn');
 
     function openModal(name) {
-      // スポットライト演出
-      const tanzaku = document.querySelector('.tanzaku.' + name === 'wakakusa' ? '.wakakusa' : '.cree');
-      document.querySelectorAll('.tanzaku').forEach(t => t.classList.remove('spotlight'));
-
-      // タップされた短冊を特定してspotlight付与
-      const target = name === 'wakakusa'
-        ? document.querySelector('.wakakusa')
-        : document.querySelector('.cree');
-
-      if (target) target.classList.add('spotlight');
-
-      // 1秒の間を置いてからモーダルを開く
-      setTimeout(() => {
-        document.getElementById('modal-' + name).classList.add('active');
-        document.body.style.overflow = 'hidden';
-        closeBtn.setAttribute('data-modal', name);
-        closeBtn.style.display = 'flex';
-        if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
-
-        // モーダルが開いたらspotlightを戻す
-        setTimeout(() => {
-          if (target) target.classList.remove('spotlight');
-        }, 800);
-      }, 900);
+  document.getElementById('modal-' + name).classList.add('active');
+  document.body.style.overflow = 'hidden';
+  closeBtn.setAttribute('data-modal', name);
+  closeBtn.style.display = 'flex';
+  if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
     }
 
     function closeModal(name) {
