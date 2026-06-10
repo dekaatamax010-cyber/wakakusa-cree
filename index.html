@@ -98,32 +98,29 @@
       white-space: nowrap;
     }
 
-    .wakakusa { background-color: #8c3a3a; }
-    .cree     { background-color: #2e4a3d; }
-
-    .tanzaku:hover {
-      opacity: 1;
+    .wakakusa {
+      background-color: #8c3a3a;
+      background-image: url('./images/tanzaku-wakakusa.png');
+      background-size: cover;
+      background-position: center;
+      box-shadow:
+        5px 8px 16px rgba(60, 15, 8, 0.6),
+        2px 3px 5px rgba(0, 0, 0, 0.4),
+        inset -2px -5px 10px rgba(0, 0, 0, 0.25);
     }
 
-    .wakakusa:hover {
-      background-image: linear-gradient(
-        to bottom,
-        rgba(255, 240, 200, 0.35) 0%,
-        rgba(255, 220, 170, 0.18) 40%,
-        rgba(0, 0, 0, 0.0) 70%,
-        rgba(0, 0, 0, 0.08) 100%
-      );
+    .cree {
+      background-color: #2e4a3d;
+      background-image: url('./images/tanzaku-cree.png');
+      background-size: cover;
+      background-position: center;
+      box-shadow:
+        5px 8px 16px rgba(8, 30, 22, 0.6),
+        2px 3px 5px rgba(0, 0, 0, 0.4),
+        inset -2px -5px 10px rgba(0, 0, 0, 0.25);
     }
 
-    .cree:hover {
-      background-image: linear-gradient(
-        to bottom,
-        rgba(255, 240, 200, 0.35) 0%,
-        rgba(255, 220, 170, 0.18) 40%,
-        rgba(0, 0, 0, 0.0) 70%,
-        rgba(0, 0, 0, 0.08) 100%
-      );
-    }
+    .tanzaku:hover { opacity: 0.88; }
 
     .tanzaku-name-cree {
       display: flex;
@@ -667,7 +664,7 @@
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
       </div>
 
-      <!-- エンドレス横スクロールギャラリー -->
+   <!-- エンドレス横スクロールギャラリー -->
       <!-- 画像を差し替える場合は creer-01〜05.jpg を変更してください -->
       <div class="gallery-scroll">
         <div class="gallery-track" id="gallery-cree">
