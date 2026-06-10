@@ -112,13 +112,13 @@
 
     .tanzaku:hover { opacity: 0.82; }
 
-    /* 短冊画像を背景として使用 */
     .tanzaku::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-size: contain;
+      width: 120px;
+      height: 360px;
+      background-size: 120px 360px;
       background-repeat: no-repeat;
       background-position: center;
       z-index: 0;
@@ -136,11 +136,25 @@
     .wakakusa { background-color: transparent; }
     .cree     { background-color: transparent; }
 
-    /* ロゴ・テキストを画像の上に */
     .tanzaku-name,
     .tanzaku-name-cree {
       position: relative;
       z-index: 1;
+    }
+
+    /* 若草ロゴを小さく */
+    .tanzaku-name {
+      width: 65%;
+      height: 75%;
+      background-image: var(--logo-wakakusa);
+      background-size: 65%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 8px;
     }
 
     .tanzaku-name-cree {
@@ -685,7 +699,7 @@
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
       </div>
 
-    <!-- エンドレス横スクロールギャラリー -->
+      <!-- エンドレス横スクロールギャラリー -->
       <!-- 画像を差し替える場合は creer-01〜05.jpg を変更してください -->
       <div class="gallery-scroll">
         <div class="gallery-track" id="gallery-cree">
