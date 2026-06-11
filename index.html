@@ -70,48 +70,13 @@
       justify-content: center;
       cursor: pointer;
       transition: opacity 0.8s ease;
-    }
-
-    .tanzaku:hover { opacity: 0.75; }
-
-    .tanzaku-name {
-      width: 80%;
-      height: 85%;
-      background-image: var(--logo-wakakusa);
-      background-size: 75%;
-      background-repeat: no-repeat;
-      background-position: center center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 8px;
-    }
-
-    .wakakusa-copy {
-      writing-mode: horizontal-tb;
-      font-size: 0.5rem;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      color: #f5f0e8;
-      opacity: 0.85;
-      white-space: nowrap;
-    }
-
-    .tanzaku {
-      width: 120px;
-      height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: opacity 0.8s ease;
       background: transparent;
       position: relative;
     }
 
     .tanzaku:hover { opacity: 0.82; }
 
+    /* 短冊画像を背景として表示 */
     .tanzaku::before {
       content: '';
       position: absolute;
@@ -136,13 +101,7 @@
     .wakakusa { background-color: transparent; }
     .cree     { background-color: transparent; }
 
-    .tanzaku-name,
-    .tanzaku-name-cree {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* 若草ロゴを小さく */
+    /* ロゴ・テキストを画像の上に */
     .tanzaku-name {
       width: 65%;
       height: 75%;
@@ -155,6 +114,13 @@
       align-items: center;
       justify-content: flex-start;
       padding-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tanzaku-name-cree {
+      position: relative;
+      z-index: 1;
     }
 
     .tanzaku-name-cree {
