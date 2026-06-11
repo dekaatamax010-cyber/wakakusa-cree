@@ -8,11 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --logo-wakakusa: url('https://i.imgur.com/ZV6YwqD.png');
-      --color-dark:    #1e0a02;
-      --color-mid:     #5a3018;
+      --color-dark:     #1e0a02;
+      --color-mid:      #5a3018;
       --color-bg-modal: #faf3e0;
-      --bg-texture:    url('./images/back.jpg');
+      --bg-texture:     url('./images/back.jpg');
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +29,7 @@
       justify-content: center;
     }
 
-
-    /* ── 閉じるボタン ── */
+    /* ── 閉じるボタン（モーダル右上）── */
     .modal-close {
       position: fixed;
       top: 20px;
@@ -69,14 +67,14 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: opacity 0.8s ease;
-      background: transparent;
       position: relative;
+      background: transparent;
+      transition: opacity 0.8s ease;
     }
 
     .tanzaku:hover { opacity: 0.82; }
 
-    /* 短冊画像を背景として表示 */
+    /* 短冊画像（透過PNG）*/
     .tanzaku::before {
       content: '';
       position: absolute;
@@ -90,40 +88,13 @@
       filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.45));
     }
 
-    .wakakusa::before {
-      background-image: url('./images/tanzaku-wakakusa.png');
-    }
+    .wakakusa::before { background-image: url('./images/tanzaku-wakakusa.png'); }
+    .cree::before     { background-image: url('./images/tanzaku-cree.png'); }
 
-    .cree::before {
-      background-image: url('./images/tanzaku-cree.png');
-    }
-
-    .wakakusa { background-color: transparent; }
-    .cree     { background-color: transparent; }
-
-    /* ロゴ・テキストを画像の上に */
-    .tanzaku-name {
-      width: 65%;
-      height: 75%;
-      background-image: var(--logo-wakakusa);
-      background-size: 65%;
-      background-repeat: no-repeat;
-      background-position: center center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 8px;
+    /* 短冊内コンテンツ */
+    .tanzaku-content {
       position: relative;
       z-index: 1;
-    }
-
-    .tanzaku-name-cree {
-      position: relative;
-      z-index: 1;
-    }
-
-    .tanzaku-name-cree {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -132,27 +103,6 @@
       height: 100%;
       gap: 12px;
       padding: 20px 8px;
-    }
-
-    .cree-vine { width: 36px; height: 90px; opacity: 0.85; }
-
-    .cree-title {
-      font-family: 'Zen Old Mincho', serif;
-      font-size: 0.95rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      color: #f5f0e8;
-      white-space: nowrap;
-    }
-
-    .cree-sub {
-      font-family: 'Zen Old Mincho', serif;
-      font-size: 0.45rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      color: #f5f0e8;
-      opacity: 0.8;
-      white-space: nowrap;
     }
 
     /* ── モーダル共通 ── */
@@ -193,7 +143,6 @@
       width: 100%;
       aspect-ratio: 4/3;
       overflow: hidden;
-      margin-bottom: 0;
     }
 
     .modal-image {
@@ -204,12 +153,11 @@
       display: block;
     }
 
-    /* ── 横スクロールギャラリー（エンドレス自動スクロール）── */
+    /* ── 横スクロールギャラリー ── */
     .gallery-scroll {
       width: 100%;
       overflow: hidden;
       background-color: var(--color-bg-modal);
-      position: relative;
     }
 
     .gallery-track {
@@ -218,9 +166,7 @@
       width: max-content;
     }
 
-    .gallery-track:hover {
-      animation-play-state: paused;
-    }
+    .gallery-track:hover { animation-play-state: paused; }
 
     @keyframes gallery-loop {
       0%   { transform: translateX(0); }
@@ -279,9 +225,7 @@
       transition: transform 0.5s ease;
     }
 
-    .gallery-overlay.active .gallery-full {
-      transform: scale(1);
-    }
+    .gallery-overlay.active .gallery-full { transform: scale(1); }
 
     .gallery-close {
       position: absolute;
@@ -360,15 +304,8 @@
       gap: 8px;
     }
 
-    .modal-hours-row span:first-child {
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .modal-hours-row span:last-child {
-      white-space: nowrap;
-      text-align: right;
-    }
+    .modal-hours-row span:first-child { white-space: nowrap; flex-shrink: 0; }
+    .modal-hours-row span:last-child  { white-space: nowrap; text-align: right; }
 
     /* ── 予約・コンタクトボタン ── */
     .modal-reserve {
@@ -435,16 +372,9 @@
 
     .footer-btn:hover { background-color: rgba(44, 44, 44, 0.08); }
 
-    .footer-btn-icon {
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
+    .footer-btn-icon { font-size: 1.1rem; flex-shrink: 0; }
 
-    .footer-btn-body {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
+    .footer-btn-body { display: flex; flex-direction: column; gap: 3px; }
 
     .footer-btn-label {
       font-size: clamp(0.58rem, 1.6vw, 0.65rem);
@@ -551,27 +481,14 @@
   <!-- 短冊エリア -->
   <div class="stage">
 
-    <!-- 若草 -->
+    <!-- 若草：tanzaku-wakakusa.png を背景に使用 -->
     <div class="tanzaku wakakusa" onclick="openModal('wakakusa')">
-      <span class="tanzaku-name">
-        <span class="wakakusa-copy">食と喫茶</span>
-      </span>
+      <div class="tanzaku-content"></div>
     </div>
 
-    <!-- Creer -->
+    <!-- Creer：tanzaku-cree.png を背景に使用 -->
     <div class="tanzaku cree" onclick="openModal('cree')">
-      <span class="tanzaku-name-cree">
-        <svg class="cree-vine" viewBox="0 0 60 180" xmlns="http://www.w3.org/2000/svg">
-          <path d="M30 10 Q35 40 30 70 Q25 100 30 140 Q33 160 30 175"
-                stroke="#f5f0e8" stroke-width="1" fill="none" opacity="0.7"/>
-          <ellipse cx="38" cy="35" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-30 38 35)"/>
-          <ellipse cx="22" cy="60" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(20 22 60)"/>
-          <ellipse cx="36" cy="90" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(-15 36 90)"/>
-          <ellipse cx="24" cy="118" rx="7" ry="4" fill="#f5f0e8" opacity="0.6" transform="rotate(25 24 118)"/>
-        </svg>
-        <span class="cree-title">Creer</span>
-        <span class="cree-sub">gallery &amp; space</span>
-      </span>
+      <div class="tanzaku-content"></div>
     </div>
 
   </div>
@@ -584,21 +501,19 @@
         <img class="modal-image" src="./images/unnamed.webp" alt="若草">
       </div>
 
-      <!-- エンドレス横スクロールギャラリー -->
-      <!-- 画像を差し替える場合は menu-01〜05.jpg を変更してください -->
+      <!-- ギャラリー：menu-01〜05.jpg を差し替えてください -->
       <div class="gallery-scroll">
-        <div class="gallery-track" id="gallery-wakakusa">
-          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg', event)"><img src="./images/menu-01.jpg" alt="若草1"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg', event)"><img src="./images/menu-02.jpg" alt="若草2"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg', event)"><img src="./images/menu-03.jpg" alt="若草3"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg', event)"><img src="./images/menu-04.jpg" alt="若草4"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-05.jpg', event)"><img src="./images/menu-05.jpg" alt="若草5"></div>
-          <!-- 以下は複製（エンドレス用）-->
-          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg', event)"><img src="./images/menu-01.jpg" alt="若草1"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg', event)"><img src="./images/menu-02.jpg" alt="若草2"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg', event)"><img src="./images/menu-03.jpg" alt="若草3"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg', event)"><img src="./images/menu-04.jpg" alt="若草4"></div>
-          <div class="gallery-item" onclick="openGallery('./images/menu-05.jpg', event)"><img src="./images/menu-05.jpg" alt="若草5"></div>
+        <div class="gallery-track">
+          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg', event)"><img src="./images/menu-01.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg', event)"><img src="./images/menu-02.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg', event)"><img src="./images/menu-03.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg', event)"><img src="./images/menu-04.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-05.jpg', event)"><img src="./images/menu-05.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-01.jpg', event)"><img src="./images/menu-01.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-02.jpg', event)"><img src="./images/menu-02.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-03.jpg', event)"><img src="./images/menu-03.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-04.jpg', event)"><img src="./images/menu-04.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/menu-05.jpg', event)"><img src="./images/menu-05.jpg" alt=""></div>
         </div>
       </div>
 
@@ -614,6 +529,7 @@
           <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
+        <!-- 予約導線：hrefを変更してください -->
         <div class="modal-reserve">
           <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">お席のご案内<br>DMにて承ります</a>
           <a class="btn-reserve" href="tel:054-397-4993">お電話でのご予約<br>054-397-4993</a>
@@ -664,21 +580,20 @@
       <div class="modal-image-wrap">
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
       </div>
-<!-- エンドレス横スクロールギャラリー -->
-      <!-- 画像を差し替える場合は creer-01〜05.jpg を変更してください -->
+
+      <!-- ギャラリー：creer-01〜05.jpg を差し替えてください -->
       <div class="gallery-scroll">
-        <div class="gallery-track" id="gallery-cree">
-          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt="Creer1"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt="Creer2"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt="Creer3"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt="Creer4"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt="Creer5"></div>
-          <!-- 以下は複製（エンドレス用）-->
-          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt="Creer1"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt="Creer2"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt="Creer3"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt="Creer4"></div>
-          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt="Creer5"></div>
+        <div class="gallery-track">
+          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-02.jpg', event)"><img src="./images/creer-02.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-03.jpg', event)"><img src="./images/creer-03.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-04.jpg', event)"><img src="./images/creer-04.jpg" alt=""></div>
+          <div class="gallery-item" onclick="openGallery('./images/creer-05.jpg', event)"><img src="./images/creer-05.jpg" alt=""></div>
         </div>
       </div>
 
@@ -694,11 +609,13 @@
           <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
         </div>
 
+        <!-- コンタクト：hrefを変更してください -->
         <div class="modal-reserve">
           <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">Contact / DM</a>
           <a class="btn-reserve" href="tel:054-397-4993">Contact / TEL<br>054-397-4993</a>
         </div>
 
+        <!-- 通販エリア（準備中）-->
         <div class="modal-shop">online shop — 準備中</div>
 
         <div class="modal-footer">
@@ -764,6 +681,18 @@
       closeBtn.style.display = 'none';
     }
 
+    function openGallery(src, e) {
+      e.stopPropagation();
+      document.getElementById('gallery-full-img').src = src;
+      const overlay = document.getElementById('gallery-overlay');
+      overlay.classList.add('active');
+      if (!isLineBrowser) { history.pushState({ gallery: true }, '', ''); }
+    }
+
+    function closeGallery() {
+      document.getElementById('gallery-overlay').classList.remove('active');
+    }
+
     if (!isLineBrowser) {
       window.addEventListener('popstate', function() {
         const overlay = document.getElementById('gallery-overlay');
@@ -775,18 +704,6 @@
           });
         }
       });
-    }
-
-    function openGallery(src, e) {
-      e.stopPropagation();
-      document.getElementById('gallery-full-img').src = src;
-      const overlay = document.getElementById('gallery-overlay');
-      overlay.classList.add('active');
-      if (!isLineBrowser) { history.pushState({ gallery: true }, '', ''); }
-    }
-
-    function closeGallery() {
-      document.getElementById('gallery-overlay').classList.remove('active');
     }
 
     // イントロ演出
@@ -805,4 +722,4 @@
   </script>
 
 </body>
-</html> 
+</html>
