@@ -248,6 +248,36 @@
 
     .gallery-close:hover { opacity: 0.6; }
 
+    /* ── テキストリスト ── */
+    .modal-list {
+      margin-bottom: 32px;
+    }
+
+    .modal-list-title {
+      font-size: clamp(0.7rem, 2vw, 0.8rem);
+      letter-spacing: 0.2em;
+      color: var(--color-mid);
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(44, 44, 44, 0.15);
+    }
+
+    .modal-list-item {
+      font-size: clamp(0.78rem, 2vw, 0.88rem);
+      letter-spacing: 0.05em;
+      line-height: 2;
+      color: var(--color-dark);
+      padding-left: 1em;
+      position: relative;
+    }
+
+    .modal-list-item::before {
+      content: '・';
+      position: absolute;
+      left: 0;
+      color: var(--color-mid);
+    }
+
     /* ── コンテンツ本体 ── */
     .modal-content {
       padding: clamp(24px, 5vw, 48px) clamp(20px, 6vw, 40px);
@@ -472,7 +502,7 @@
   <div class="intro" id="intro">
     <div class="intro-bg"></div>
     <div class="intro-overlay"></div>
-    <p class="intro-copy">食と喫茶、日々の集い</p>
+    <p class="intro-copy">五感が心地よく満たされる時間と空間</p>
   </div>
 
   <!-- 共通閉じるボタン -->
@@ -520,7 +550,24 @@
       <div class="modal-content">
         <h2 class="modal-title">若草</h2>
         <p class="modal-caption">食と喫茶　静岡市葵区伝馬町</p>
-        <p class="modal-text">灯りと器に囲まれた空間で、家庭料理と喫茶をお楽しみください。骨董品に囲まれたカウンターで、ゆったりと流れる時間をどうぞ。</p>
+        <p class="modal-text">1階の小皿豆皿料理『若草』は、お一人様でも気軽に立ち寄れる、我が家のような温かなお店です。旬の食材を使い手間暇かけて作る家庭料理は、昭和のお母さんを思い出させる、どこか昔懐かしい優しい味わい。美しい器と花ともにお愉しみいただけます。</p>
+
+        <p class="modal-text">１０時から２２時まで、朝から夜まで通し営業なので、一日を通して様々なシーンにご利用いただけます。あなたの日常に寄り添う場所として、思い思いの時間をゆっくりとお過ごしください。</p>
+
+        <div class="modal-list">
+          <p class="modal-list-title">たとえばこんな時間</p>
+          <p class="modal-list-item">遅めのモーニングやランチに</p>
+          <p class="modal-list-item">お茶やスイーツを楽しむカフェとして</p>
+          <p class="modal-list-item">明るい時間からの心地よい昼飲みに</p>
+          <p class="modal-list-item">お仕事帰りに軽く一人で一杯</p>
+          <p class="modal-list-item">家族や友人との楽しい夜ごはんに</p>
+          <p class="modal-list-item">食事の前や後のカフェバー利用</p>
+        </div>
+
+        <div class="modal-list">
+          <p class="modal-list-title">家族や友人との大切な時間</p>
+          <p class="modal-text">ご予約にて、お誕生日やアニバーサリー用のデザートプレート、お子様用のランチプレートもご用意できます。どうぞお気軽にご相談ください。</p>
+        </div>
 
         <div class="modal-hours">
           <p class="modal-hours-title">営　業　時　間</p>
@@ -581,7 +628,7 @@
         <img class="modal-image" src="./images/unnamed%20(2).jpg" alt="Creer">
       </div>
 
-      <!-- ギャラリー：creer-01〜05.jpg を差し替えてください -->
+     <!-- ギャラリー：creer-01〜05.jpg を差し替えてください -->
       <div class="gallery-scroll">
         <div class="gallery-track">
           <div class="gallery-item" onclick="openGallery('./images/creer-01.jpg', event)"><img src="./images/creer-01.jpg" alt=""></div>
@@ -600,7 +647,28 @@
       <div class="modal-content">
         <h2 class="modal-title">Creer</h2>
         <p class="modal-caption">gallery &amp; space　静岡市葵区伝馬町</p>
-        <p class="modal-text">器と、光と、静けさと。骨董品と工芸品が静かに並ぶ空間で、あなただけの一点をお探しください。</p>
+        <p class="modal-text">『Creer（クレエ）』とは、フランス語で「創造する」という意味をもつ言葉です。一人ひとりの自由な発想や人の心を動かす表現、そして物作りへの想いが、きっと温かい素敵な未来へと繋がると信じています。</p>
+
+        <p class="modal-text">使い方は自由自在。あなたの夢や想いをカタチにするお手伝いができるよう、クレエが一緒に寄り添い、未来を叶えていく存在でありたい。発想や表現が、あなたの日常に彩りを与え、そこには、人との繋がりや温かい出会いがきっと待っています。</p>
+
+        <div class="modal-list">
+          <p class="modal-list-title">例えば、こんな使い方に</p>
+          <p class="modal-list-item">ギャラリー ／ 個展、グループ展</p>
+          <p class="modal-list-item">ポップアップ ／ 期間限定ショップ</p>
+          <p class="modal-list-item">ワークショップ ／ 各種教室、スクール</p>
+          <p class="modal-list-item">スタジオ ／ 写真や動画の撮影、配信</p>
+          <p class="modal-list-item">パーティー ／ お食事会、アコースティックライブ　etc</p>
+        </div>
+
+        <div class="modal-list">
+          <p class="modal-list-title">お手伝い出来ること</p>
+          <p class="modal-text">あなたの"やってみたい"をトータルでサポートします。</p>
+          <p class="modal-list-item">若草のお弁当やパーティー料理の提案</p>
+          <p class="modal-list-item">店内装飾・ディスプレイのサポート</p>
+          <p class="modal-list-item">DM制作、SNSなどでの告知・広報</p>
+          <p class="modal-list-item">食器やカトラリーの貸出し</p>
+          <p class="modal-list-item">その他、何でもお気軽にご相談ください。</p>
+        </div>
 
         <div class="modal-hours">
           <p class="modal-hours-title">営　業　時　間</p>
