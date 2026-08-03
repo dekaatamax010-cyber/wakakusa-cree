@@ -541,17 +541,17 @@
         <div class="gallery-thumb active" onclick="switchImage('wakakusa', './images/unnamed.webp', this)">
           <img src="./images/unnamed.webp" alt="">
         </div>
-        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/menu-01.jpg', this)">
-          <img src="./images/menu-01.jpg" alt="">
+        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/#U5fa1#U81b3.jpg', this)">
+          <img src="./images/#U5fa1#U81b3.jpg" alt="">
         </div>
-        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/menu-02.jpg', this)">
-          <img src="./images/menu-02.jpg" alt="">
+        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/#U30d0#U30e9#U76bf.jpg', this)">
+          <img src="./images/#U30d0#U30e9#U76bf.jpg" alt="">
         </div>
-        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/menu-03.jpg', this)">
-          <img src="./images/menu-03.jpg" alt="">
+        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/#U30d5#U30b0.jpg', this)">
+          <img src="./images/#U30d5#U30b0.jpg" alt="">
         </div>
-        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/menu-04.jpg', this)">
-          <img src="./images/menu-04.jpg" alt="">
+        <div class="gallery-thumb" onclick="switchImage('wakakusa', './images/#U672c.jpg', this)">
+          <img src="./images/#U672c.jpg" alt="">
         </div>
       </div>
 
@@ -680,148 +680,4 @@
           <p class="modal-text">あなたの"やってみたい"をトータルでサポートします。</p>
           <p class="modal-list-item">若草のお弁当やパーティー料理の提案</p>
           <p class="modal-list-item">店内装飾・ディスプレイのサポート</p>
-          <p class="modal-list-item">DM制作、SNSなどでの告知・広報</p>
-          <p class="modal-list-item">食器やカトラリーの貸出し</p>
-          <p class="modal-list-item">その他、何でもお気軽にご相談ください。</p>
-        </div>
-
-        <div class="modal-shop">online shop — 準備中</div>
-
-        <div class="modal-hours">
-          <p class="modal-hours-title">営　業　時　間</p>
-          <div class="modal-hours-row"><span>火・水・木・日</span><span>12:00 — 21:00</span></div>
-          <div class="modal-hours-row"><span>金・土</span><span>12:00 — 23:00</span></div>
-          <div class="modal-hours-row"><span>月曜日</span><span>定休日</span></div>
-        </div>
-
-        <div class="modal-reserve">
-          <a class="btn-reserve" href="https://ig.me/m/creer_shizuoka" target="_blank">Contact / DM</a>
-          <a class="btn-reserve" href="tel:054-397-4993">Contact / TEL<br>054-397-4993</a>
-        </div>
-
-        <div class="modal-footer">
-          <a class="footer-btn" href="https://maps.google.com/?q=X9GQ%2B3R+静岡市葵区" target="_blank">
-            <span class="footer-btn-icon">📍</span>
-            <span class="footer-btn-body">
-              <span class="footer-btn-label">MAP</span>
-              <span class="footer-btn-text">静岡県静岡市葵区伝馬町10-13</span>
-              <span class="footer-btn-hint">タップしてGoogleマップで開く</span>
-            </span>
-          </a>
-          <a class="footer-btn" href="tel:054-397-4993">
-            <span class="footer-btn-icon">📞</span>
-            <span class="footer-btn-body">
-              <span class="footer-btn-label">TEL</span>
-              <span class="footer-btn-text">054-397-4993</span>
-              <span class="footer-btn-hint">タップして電話する</span>
-            </span>
-          </a>
-          <a class="footer-btn" href="https://www.instagram.com/creer_shizuoka" target="_blank">
-            <span class="footer-btn-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
-            <span class="footer-btn-body">
-              <span class="footer-btn-label">Instagram</span>
-              <span class="footer-btn-text">@creer_shizuoka</span>
-              <span class="footer-btn-hint">タップしてInstagramを開く</span>
-            </span>
-          </a>
-        </div>
-
-        <button class="modal-back" onclick="closeModal('cree')">— 閉じる —</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 拡大表示オーバーレイ -->
-  <div class="gallery-overlay" id="gallery-overlay" onclick="closeGallery()">
-    <button class="gallery-close" onclick="closeGallery()">✕</button>
-    <img class="gallery-full" id="gallery-full-img" src="" alt="" onclick="event.stopPropagation()">
-  </div>
-
-  <script>
-    const isLineBrowser = navigator.userAgent.indexOf('Line') !== -1 ||
-                          navigator.userAgent.indexOf('FBAN') !== -1;
-    const closeBtn = document.getElementById('modal-close-btn');
-
-    function openModal(name) {
-      document.getElementById('modal-' + name).classList.add('active');
-      document.body.style.overflow = 'hidden';
-      closeBtn.setAttribute('data-modal', name);
-      closeBtn.style.display = 'flex';
-      if (!isLineBrowser) { history.pushState({ modal: name }, '', ''); }
-    }
-
-    function closeModal(name) {
-      document.getElementById('modal-' + name).classList.remove('active');
-      document.body.style.overflow = '';
-      closeBtn.style.display = 'none';
-    }
-
-    // サムネイルタップでメイン画像切り替え
-    function switchImage(modalName, src, thumbEl) {
-      const mainImg = document.getElementById('main-img-' + modalName);
-      mainImg.style.opacity = '0';
-      setTimeout(() => {
-        mainImg.src = src;
-        mainImg.style.opacity = '1';
-      }, 300);
-      // アクティブ状態を更新
-      const thumbs = document.getElementById('thumbs-' + modalName);
-      thumbs.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-      thumbEl.classList.add('active');
-    }
-
-    function openGallery(src, e) {
-      e.stopPropagation();
-      document.getElementById('gallery-full-img').src = src;
-      const overlay = document.getElementById('gallery-overlay');
-      overlay.classList.add('active');
-      if (!isLineBrowser) { history.pushState({ gallery: true }, '', ''); }
-    }
-
-    function closeGallery() {
-      document.getElementById('gallery-overlay').classList.remove('active');
-    }
-
-    if (!isLineBrowser) {
-      window.addEventListener('popstate', function() {
-        const overlay = document.getElementById('gallery-overlay');
-        if (overlay.classList.contains('active')) {
-          closeGallery();
-        } else {
-          document.querySelectorAll('.modal.active').forEach(m => {
-            closeModal(m.id.replace('modal-', ''));
-          });
-        }
-      });
-    }
-
-    // イントロ演出：画像表示後にタイトルがふわっと浮かび上がる
-    const intro = document.getElementById('intro');
-    const introCopy = document.getElementById('intro-copy');
-    let introTimer;
-
-    // 1.5秒後にタイトルをフェードイン
-    setTimeout(() => {
-      introCopy.classList.add('show');
-    }, 1500);
-
-    // 5秒後に自動フェードアウト
-    introTimer = setTimeout(hideIntro, 5000);
-
-    function hideIntro() {
-      clearTimeout(introTimer);
-      intro.classList.add('hide');
-      setTimeout(() => { intro.style.display = 'none'; }, 2500);
-    }
-
-    intro.addEventListener('click', hideIntro);
-  </script>
-
-</body>
-</html>
+          <p class="modal-list-item">DM制作、SNSなどでの告知・
